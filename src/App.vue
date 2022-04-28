@@ -1,21 +1,40 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue';
+import {
+  NLayout,
+  NSpace,
+  NLayoutHeader,
+  NLayoutContent,
+  NMenu,
+  MenuOption,
+} from 'naive-ui';
+
+const activeKey = ref<string | null>(null);
+const menuOptions = ref<MenuOption[]>([
+  {
+    label: 'Home',
+    key: 'home',
+  },
+  {
+    label: 'Character',
+    key: 'character',
+  },
+]);
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <n-space vertical size="large">
+    <n-layout>
+      <n-layout-header>
+        <n-menu
+          v-model:value="activeKey"
+          mode="horizontal"
+          :options="menuOptions"
+        />
+      </n-layout-header>
+      <n-layout-content content-style="padding: 24px;">
+        Hello :O
+      </n-layout-content>
+    </n-layout>
+  </n-space>
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
