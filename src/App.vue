@@ -33,7 +33,7 @@ const menuOptions = ref<MenuOption[]>([
         />
       </n-layout-header>
       <n-layout-content content-style="padding: 24px;">
-        Hello :O
+        <router-view />
       </n-layout-content>
     </n-layout>
   </n-space>
