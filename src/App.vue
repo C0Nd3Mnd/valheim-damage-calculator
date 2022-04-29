@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { PropType, ref } from 'vue';
 import {
+  NConfigProvider,
   NLayout,
   NSpace,
   NLayoutHeader,
@@ -8,6 +9,7 @@ import {
   NMenu,
   MenuOption,
 } from 'naive-ui';
+import { Breakpoints } from 'naive-ui/lib/config-provider/src/internal-interface';
 
 const activeKey = ref<string | null>(null);
 const menuOptions = ref<MenuOption[]>([
@@ -23,18 +25,20 @@ const menuOptions = ref<MenuOption[]>([
 </script>
 
 <template>
-  <n-space vertical size="large">
-    <n-layout>
-      <n-layout-header>
-        <n-menu
-          v-model:value="activeKey"
-          mode="horizontal"
-          :options="menuOptions"
-        />
-      </n-layout-header>
-      <n-layout-content content-style="padding: 24px;">
-        <router-view />
-      </n-layout-content>
-    </n-layout>
-  </n-space>
+  <n-config-provider>
+    <n-space vertical size="large">
+      <n-layout>
+        <n-layout-header>
+          <n-menu
+            v-model:value="activeKey"
+            mode="horizontal"
+            :options="menuOptions"
+          />
+        </n-layout-header>
+        <n-layout-content content-style="padding: 24px;">
+          <router-view />
+        </n-layout-content>
+      </n-layout>
+    </n-space>
+  </n-config-provider>
 </template>

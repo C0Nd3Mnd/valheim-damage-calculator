@@ -273,7 +273,7 @@ export const armorSets: ArmorSet[] = [
   },
 ];
 
-export function armorSelect(piece: ArmorPiece) {
+export function armorOptions(piece: ArmorPiece) {
   return [
     {
       label: '-',

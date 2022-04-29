@@ -1,8 +1,9 @@
 import { App } from 'vue';
 import { createStore } from 'vuex';
 import VuexPersistence from 'vuex-persist';
-import { armor, pieceByName } from '../data/armor';
-import { ArmorPiece } from '../types';
+import { armor, armorSets, pieceByName } from '../data/armor';
+import { ArmorPiece, TenacityModifier } from '../types';
+import { potions } from '../data/potions';
 
 function random(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -34,6 +35,8 @@ export function setupStore(app: App) {
         name: '',
         level: 0,
       },
+      activePotions: [] as string[],
+      health: 25,
     }),
     getters: {
       armorByPiece(state) {
@@ -105,9 +108,79 @@ export function setupStore(app: App) {
             pieceByName(state[ArmorPiece.Cape].name)?.levels?.length || 0,
         };
       },
+      activeModifiers(state) {
+        let modifiers: TenacityModifier[] = [];
+
+        const pieces: string[] = [];
+
+        for (const armorPiece of [
+          ArmorPiece.Helmet,
+          ArmorPiece.Chest,
+          ArmorPiece.Leg,
+          ArmorPiece.Cape,
+        ]) {
+          if (!state[armorPiece].name) {
+            continue;
+          }
+
+          pieces.push(state[armorPiece].name);
+        }
+
+        for (const name of state.activePotions) {
+          const potion = potions.find((x) => x.name === name);
+
+          if (!potion) {
+            continue;
+          }
+
+          modifiers = [...modifiers, ...potion.tenacityModifiers];
+        }
+
+        for (const armorSet of armorSets) {
+          if (!armorSet.pieces.every((x) => pieces.includes(x))) {
+            continue;
+          }
+
+          modifiers = [...modifiers, ...armorSet.tenacityModifiers];
+        }
+
+        for (const name of pieces) {
+          const piece = pieceByName(name);
+
+          if (!piece) {
+            continue;
+          }
+
+          modifiers = [...modifiers, ...piece.tenacityModifiers];
+        }
+
+        const reducedModifiers: TenacityModifier[] = [];
+
+        for (const modifier of modifiers) {
+          let reducedModifier = reducedModifiers.find(
+            (r) => r.type === modifier.type
+          );
+
+          if (reducedModifier) {
+            if (modifier.tenacity < reducedModifier.tenacity) {
+              reducedModifier.tenacity = modifier.tenacity;
+            }
+          } else {
+            reducedModifiers.push(modifier);
+          }
+        }
+
+        return reducedModifiers;
+      },
     },
     mutations: {
       setArmor(state, payload: { piece: ArmorPiece; name: string }) {
+        if (payload.name === '') {
+          state[payload.piece].name = '';
+          state[payload.piece].level = 0;
+          return;
+        }
+
         const piece = pieceByName(payload.name);
 
         if (!piece) {
@@ -124,6 +197,9 @@ export function setupStore(app: App) {
       },
       setLevel(state, payload: { piece: ArmorPiece; level: number }) {
         state[payload.piece].level = payload.level;
+      },
+      setPotions(state, potions: string[]) {
+        state.activePotions = potions;
       },
     },
     plugins: [vuexLocal.plugin],

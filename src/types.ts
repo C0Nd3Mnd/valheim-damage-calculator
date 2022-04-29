@@ -37,15 +37,23 @@ export enum Tenacity {
 }
 
 /**
+ * `TenacityModifier` maps a damage type to a tenacity level.
+ */
+export interface TenacityModifier {
+  type: DamageType;
+  tenacity: Tenacity;
+}
+
+/**
  * Armor describes one specific piece of armor.
  */
 export interface Armor {
   /**
-   * Name of the of armor piece.
+   * `name` of the of armor piece.
    */
   name: string;
   /**
-   * Piece of armor this piece attaches/belongs to.
+   * `piece` of armor this piece attaches/belongs to.
    */
   piece: ArmorPiece;
   /**
@@ -55,10 +63,7 @@ export interface Armor {
    *
    * TODO Figure out whether weakness calculation applies before or after armor.
    */
-  tenacityModifiers: {
-    type: DamageType;
-    tenacity: Tenacity;
-  }[];
+  tenacityModifiers: TenacityModifier[];
   /**
    * `levels` is an array of armor values per level of the armor piece.
    */
@@ -84,8 +89,20 @@ export interface ArmorSet {
    * resistant to. If a damage type is not listed here, the default
    *  {@link Tenacity.Neutral} is assumed.
    */
-  tenacityModifiers: {
-    type: DamageType;
-    tenacity: Tenacity;
-  }[];
+  tenacityModifiers: TenacityModifier[];
+}
+
+/**
+ * Potion describes a specific potion.
+ */
+export interface Potion {
+  /**
+   * `name` of the potion.
+   */
+  name: string;
+  /**
+   * `tenacityModifiers` is a list of damage types the potion is weak or
+   * resistant to.
+   */
+  tenacityModifiers: TenacityModifier[];
 }
