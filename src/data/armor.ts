@@ -272,3 +272,22 @@ export const armorSets: ArmorSet[] = [
     ],
   },
 ];
+
+export function armorSelect(piece: ArmorPiece) {
+  return [
+    {
+      label: '-',
+      value: '',
+    },
+    ...armor
+      .filter((x) => x.piece === piece)
+      .map(({ name }) => ({
+        label: name,
+        value: name,
+      })),
+  ];
+}
+
+export function pieceByName(name: string) {
+  return armor.find((x) => x.name === name);
+}
