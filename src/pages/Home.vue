@@ -3,7 +3,6 @@ import { useStore } from 'vuex';
 import { creatureOptions, creatures } from '../data/creatures';
 import { computed, ref } from 'vue';
 import { Ability, DamageType, TenacityModifier } from '../types';
-import CharacterSummary from '../components/CharacterSummary.vue';
 
 const store = useStore();
 

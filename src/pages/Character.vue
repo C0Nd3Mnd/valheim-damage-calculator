@@ -3,18 +3,7 @@ import { useStore } from 'vuex';
 import { computed, ref } from 'vue';
 import { armorOptions } from '../data/armor';
 import { ArmorPiece, DamageType, Tenacity, TenacityModifier } from '../types';
-import {
-  NSelect,
-  NRate,
-  NInputNumber,
-  NCard,
-  NGrid,
-  NGi,
-  NSpace,
-} from 'naive-ui';
 import { potionOptions } from '../data/potions';
-import IconSummary from '../components/IconSummary.vue';
-import CharacterSummary from '../components/CharacterSummary.vue';
 
 const store = useStore();
 
@@ -70,13 +59,8 @@ const armorLabels = ref({
 </script>
 
 <template>
-  <n-grid
-    cols="2 xs:1 s:2 m:3 l:4 xl:4 xxl:4"
-    responsive="screen"
-    :x-gap="12"
-    :y-gap="12"
-  >
-    <n-gi
+  <v-row>
+    <v-col
       v-for="piece in [
         ArmorPiece.Helmet,
         ArmorPiece.Chest,
@@ -84,45 +68,67 @@ const armorLabels = ref({
         ArmorPiece.Cape,
       ]"
       :key="piece"
+      cols="1"
+      sm="1"
+      md="3"
+      lg="4"
     >
-      <n-card :title="armorLabels[piece]">
-        <n-select
-          :value="getName(piece)"
-          :options="getArmorOptions(piece)"
-          @update:value="setArmor(piece, $event)"
-        />
-        <template #footer>
-          <n-space justify="space-between">
-            <icon-summary
-              :value="armorByPiece[piece]"
-              icon="shield-sword-outline"
-              color="dimgrey"
-              label="Armor"
-            />
-            <n-rate
-              :value="getLevel(piece)"
-              :count="maxLevels[piece]"
-              @update:value="setLevel(piece, $event)"
-            />
-          </n-space>
+      <v-card>
+        <template #title>
+          {{ armorLabels[piece] }}
         </template>
-      </n-card>
-    </n-gi>
-    <n-gi>
-      <n-card title="Potions">
-        <n-select
-          :value="activePotions"
-          multiple
-          @update:value="setPotions"
-          :options="getPotionOptions()"
-        />
-      </n-card>
-    </n-gi>
-    <n-gi>
-      <n-card title="Health">
-        <n-input-number v-model:value="health" :min="1" :max="300" />
-      </n-card>
-    </n-gi>
-  </n-grid>
-  <!--  FOOD: <n-select multiple :max-tag-count="3" />-->
+        <template #text>
+          <v-select
+            :model-value="getName(piece)"
+            :items="getArmorOptions(piece)"
+            @update:modelValue="setArmor(piece, $event)"
+          />
+          <v-rating
+            :value="getLevel(piece)"
+            :length="maxLevels[piece]"
+            color="#ffd700"
+            hover
+            @update:modelValue="setLevel(piece, $event)"
+          />
+        </template>
+        <template #append>
+          <v-icon style="color: dimgrey">mdi-shield-sword-outline</v-icon>
+          {{ armorByPiece[piece] }} Armor
+        </template>
+      </v-card>
+    </v-col>
+    <v-col cols="1" sm="1" md="3" lg="4">
+      <v-card>
+        <template #title>Potions</template>
+        <template #text>
+          <v-combobox
+            :model-value="activePotions"
+            :items="getPotionOptions()"
+            multiple
+            outlined
+            dense
+            chips
+            @update:modelValue="setPotions"
+          />
+        </template>
+        <template #append>
+          <v-icon style="color: deeppink">mdi-bottle-tonic</v-icon>
+          {{ activePotions.length }}
+          {{ activePotions.length === 1 ? 'potion' : 'potions' }} active
+        </template>
+      </v-card>
+    </v-col>
+    <v-col cols="1" sm="1" md="3" lg="4">
+      <v-card>
+        <template #title>Health</template>
+        <template #text>
+          <v-slider v-model="health" :min="1" :max="300" :step="1" />
+        </template>
+        <template #append>
+          <v-icon style="color: red">mdi-heart</v-icon>
+          {{ health }} Health
+        </template>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>

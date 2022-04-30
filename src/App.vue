@@ -10,8 +10,8 @@ const drawer = ref<boolean | null>(null);
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" />
     </v-app-bar>
     <v-navigation-drawer v-model="drawer">
-      <v-list density="compact" nav>
-        <v-list-item to="/" prepend-icon="mdi-home" title="Home" />
+      <v-list nav>
+        <v-list-item to="/" prepend-icon="mdi-pig-variant" title="Creatures" />
         <v-list-item
           to="/character"
           prepend-icon="mdi-account"
@@ -21,9 +21,9 @@ const drawer = ref<boolean | null>(null);
       <character-summary />
     </v-navigation-drawer>
     <v-main>
-      <v-card>
+      <v-container>
         <router-view />
-      </v-card>
+      </v-container>
     </v-main>
   </v-app>
 </template>

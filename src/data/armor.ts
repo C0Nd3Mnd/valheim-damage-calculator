@@ -275,16 +275,8 @@ export const armorSets: ArmorSet[] = [
 
 export function armorOptions(piece: ArmorPiece) {
   return [
-    {
-      label: '-',
-      value: '',
-    },
-    ...armor
-      .filter((x) => x.piece === piece)
-      .map(({ name }) => ({
-        label: name,
-        value: name,
-      })),
+    '',
+    ...armor.filter((x) => x.piece === piece).map(({ name }) => name),
   ];
 }
 

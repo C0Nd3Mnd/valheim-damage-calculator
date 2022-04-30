@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { NCard, NSpace } from 'naive-ui';
-import IconSummary from './IconSummary.vue';
 import { useStore } from 'vuex';
 import { DamageType, Tenacity, TenacityModifier } from '../types';
 import { computed } from 'vue';

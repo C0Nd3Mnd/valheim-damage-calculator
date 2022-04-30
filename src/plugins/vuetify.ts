@@ -8,7 +8,7 @@ export function setupVuetify(app: App) {
       themes: {
         main: {
           colors: {
-            primary: '#f0efab',
+            primary: '#B48E74',
           },
         },
       },

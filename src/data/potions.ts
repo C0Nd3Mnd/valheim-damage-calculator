@@ -31,8 +31,5 @@ export const potions: Potion[] = [
 ];
 
 export function potionOptions() {
-  return potions.map(({ name }) => ({
-    label: name,
-    value: name,
-  }));
+  return potions.map(({ name }) => name);
 }
