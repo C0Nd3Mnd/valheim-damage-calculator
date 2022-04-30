@@ -5,6 +5,6 @@ import Home from '../pages/Home.vue';
 import Character from '../pages/Character.vue';
 
 export const routes: RouteRecordRaw[] = [
-  { path: '/', component: Home },
-  { path: '/character', component: Character },
+  { path: '/', component: Home, meta: { title: 'Creatures' } },
+  { path: '/character', component: Character, meta: { title: 'Character' } },
 ];
