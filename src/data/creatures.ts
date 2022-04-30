@@ -424,8 +424,5 @@ export const creatures: Creature[] = [
 ];
 
 export function creatureOptions() {
-  return creatures.map(({ name }) => ({
-    label: name,
-    value: name,
-  }));
+  return creatures.map(({ name }) => name);
 }

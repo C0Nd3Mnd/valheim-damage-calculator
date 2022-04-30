@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useStore } from 'vuex';
-import { NSelect, NTable, NH2, NH3 } from 'naive-ui';
 import { creatureOptions, creatures } from '../data/creatures';
 import { computed, ref } from 'vue';
 import { Ability, DamageType, TenacityModifier } from '../types';
@@ -74,23 +73,26 @@ const damageTypeLabels = ref({
 </script>
 
 <template>
-  <character-summary />
-  <n-h2>Select Creature</n-h2>
-  <n-select v-model:value="creatureName" :options="getCreatureOptions()" />
+  <h5 class="text-h5">Select Creature</h5>
+  <v-select v-model="creatureName" :items="getCreatureOptions()" />
   <template v-if="creature">
-    <template v-for="i in creature.maxLevel + 1">
-      <n-h3>Level {{ i - 1 }} {{ creatureName }}</n-h3>
-      <n-table>
-        <thead>
+    <v-table>
+      <thead>
+        <tr>
+          <th>Ability</th>
+          <th>Attacks</th>
+          <th>True Damage</th>
+          <th>After Mitigations</th>
+          <th>Hits to Lethal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template v-for="i in creature.maxLevel + 1">
           <tr>
-            <th>Ability</th>
-            <th>Attacks</th>
-            <th>True Damage</th>
-            <th>After Mitigations</th>
-            <th>Hits to Lethal</th>
+            <th class="text-subtitle-1" colspan="5">
+              Level {{ i - 1 }} {{ creatureName }}
+            </th>
           </tr>
-        </thead>
-        <tbody>
           <tr v-for="ability in creature.abilities" :key="ability.name">
             <td>{{ ability.name }}</td>
             <td>
@@ -105,8 +107,8 @@ const damageTypeLabels = ref({
             <td>{{ damageAfterMitigations(ability, i - 1) }}</td>
             <td>{{ hitsToLethal(ability, i - 1) }}</td>
           </tr>
-        </tbody>
-      </n-table></template
-    >
+        </template>
+      </tbody>
+    </v-table>
   </template>
 </template>

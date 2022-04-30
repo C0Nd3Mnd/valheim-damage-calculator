@@ -88,16 +88,18 @@ const summaryElements = computed(() => {
 </script>
 
 <template>
-  <n-card title="Character Summary">
-    <n-space justify="space-between">
-      <icon-summary
-        v-for="element in summaryElements"
-        :key="element.label"
-        :value="element.value"
-        :icon="element.icon"
-        :color="element.color"
-        :label="element.label"
-      />
-    </n-space>
-  </n-card>
+  <v-list>
+    <v-list-subheader>Character Summary</v-list-subheader>
+    <v-list-item v-for="element in summaryElements" :key="element.label">
+      <v-list-item-avatar>
+        <v-icon :style="{ color: element.color }">
+          {{ 'mdi-' + element.icon }}
+        </v-icon>
+      </v-list-item-avatar>
+      <v-list-item-header>
+        <v-list-item-title>{{ element.value }}</v-list-item-title>
+        <v-list-item-subtitle>{{ element.label }}</v-list-item-subtitle>
+      </v-list-item-header>
+    </v-list-item>
+  </v-list>
 </template>

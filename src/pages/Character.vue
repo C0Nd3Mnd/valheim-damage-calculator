@@ -123,9 +123,6 @@ const armorLabels = ref({
         <n-input-number v-model:value="health" :min="1" :max="300" />
       </n-card>
     </n-gi>
-    <n-gi :span="4">
-      <character-summary />
-    </n-gi>
   </n-grid>
   <!--  FOOD: <n-select multiple :max-tag-count="3" />-->
 </template>

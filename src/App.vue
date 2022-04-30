@@ -1,49 +1,29 @@
 <script setup lang="ts">
-import { PropType, ref } from 'vue';
-import {
-  NConfigProvider,
-  NLayout,
-  NSpace,
-  NLayoutHeader,
-  NLayoutContent,
-  NMenu,
-  MenuOption,
-} from 'naive-ui';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
-const activeKey = ref<string | null>(null);
-const menuOptions = ref<MenuOption[]>([
-  {
-    label: 'Home',
-    key: 'home',
-  },
-  {
-    label: 'Character',
-    key: 'character',
-  },
-]);
+import { ref } from 'vue';
+import CharacterSummary from './components/CharacterSummary.vue';
+const drawer = ref<boolean | null>(null);
 </script>
 
 <template>
-  <n-config-provider>
-    <n-space vertical size="large">
-      <n-layout>
-        <n-layout-header>
-          <router-link to="/">Calculate</router-link>
-          <br />
-          <router-link to="/character">Character</router-link>
-          <!--          <n-menu-->
-          <!--            v-model:value="activeKey"-->
-          <!--            mode="horizontal"-->
-          <!--            :options="menuOptions"-->
-          <!--          />-->
-        </n-layout-header>
-        <n-layout-content content-style="padding: 24px;">
-          <router-view />
-        </n-layout-content>
-      </n-layout>
-    </n-space>
-  </n-config-provider>
+  <v-app>
+    <v-app-bar color="primary" density="compact">
+      <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" />
+    </v-app-bar>
+    <v-navigation-drawer v-model="drawer">
+      <v-list density="compact" nav>
+        <v-list-item to="/" prepend-icon="mdi-home" title="Home" />
+        <v-list-item
+          to="/character"
+          prepend-icon="mdi-account"
+          title="Character"
+        />
+      </v-list>
+      <character-summary />
+    </v-navigation-drawer>
+    <v-main>
+      <v-card>
+        <router-view />
+      </v-card>
+    </v-main>
+  </v-app>
 </template>
