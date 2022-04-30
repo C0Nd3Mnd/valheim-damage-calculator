@@ -73,7 +73,11 @@ const damageTypeLabels = ref({
 
 <template>
   <h5 class="text-h5">Select Creature</h5>
-  <v-select v-model="creatureName" :items="getCreatureOptions()" />
+  <v-select
+    v-model="creatureName"
+    label="Creature"
+    :items="getCreatureOptions()"
+  />
   <template v-if="creature">
     <v-table>
       <thead>

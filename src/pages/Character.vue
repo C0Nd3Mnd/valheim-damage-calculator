@@ -59,77 +59,76 @@ const armorLabels = ref({
 </script>
 
 <template>
-  <v-layout>
-    <v-row>
-      <v-col
-        v-for="piece in [
-          ArmorPiece.Helmet,
-          ArmorPiece.Chest,
-          ArmorPiece.Leg,
-          ArmorPiece.Cape,
-        ]"
-        :key="piece"
-        cols="12"
-        sm="6"
-        md="4"
-      >
-        <v-card>
-          <template #title>
-            {{ armorLabels[piece] }}
-          </template>
-          <template #text>
-            <v-select
-              :model-value="getName(piece)"
-              :items="getArmorOptions(piece)"
-              @update:modelValue="setArmor(piece, $event)"
-            />
-            <v-rating
-              :model-value="getLevel(piece)"
-              :length="maxLevels[piece]"
-              color="#ffd700"
-              hover
-              @update:modelValue="setLevel(piece, $event)"
-            />
-          </template>
-          <template #append>
-            <v-icon style="color: dimgrey">mdi-shield-sword-outline</v-icon>
-            {{ armorByPiece[piece] }} Armor
-          </template>
-        </v-card>
-      </v-col>
-      <v-col cols="12" sm="6" md="4">
-        <v-card>
-          <template #title>Potions</template>
-          <template #text>
-            <v-combobox
-              :model-value="activePotions"
-              :items="getPotionOptions()"
-              multiple
-              outlined
-              dense
-              chips
-              @update:modelValue="setPotions"
-            />
-          </template>
-          <template #append>
-            <v-icon style="color: deeppink">mdi-bottle-tonic</v-icon>
-            {{ activePotions.length }}
-            {{ activePotions.length === 1 ? 'potion' : 'potions' }} active
-          </template>
-        </v-card>
-      </v-col>
-      <v-col cols="12" sm="6" md="4">
-        <v-card>
-          <template #title>Health</template>
-          <template #text>
-            <v-slider v-model="health" :min="1" :max="300" :step="1" />
-          </template>
-          <template #append>
-            <v-icon style="color: red">mdi-heart</v-icon>
-            {{ health }} Health
-          </template>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-layout>
+  <v-row>
+    <v-col
+      v-for="piece in [
+        ArmorPiece.Helmet,
+        ArmorPiece.Chest,
+        ArmorPiece.Leg,
+        ArmorPiece.Cape,
+      ]"
+      :key="piece"
+      cols="12"
+      sm="6"
+      md="4"
+    >
+      <v-card>
+        <template #title>
+          {{ armorLabels[piece] }}
+        </template>
+        <template #text>
+          <v-select
+            hide-details
+            :model-value="getName(piece)"
+            :label="armorLabels[piece]"
+            :items="getArmorOptions(piece)"
+            @update:modelValue="setArmor(piece, $event)"
+          />
+          <v-rating
+            :model-value="getLevel(piece)"
+            :length="maxLevels[piece]"
+            color="#ffd700"
+            hover
+            @update:modelValue="setLevel(piece, $event)"
+          />
+        </template>
+        <template #append>
+          <v-icon style="color: dimgrey">mdi-shield-sword-outline</v-icon>
+          {{ armorByPiece[piece] }} Armor
+        </template>
+      </v-card>
+    </v-col>
+    <v-col cols="12" sm="6" md="4">
+      <v-card>
+        <template #title>Potions</template>
+        <template #text>
+          <v-select
+            :model-value="activePotions"
+            :items="getPotionOptions()"
+            label="Potions"
+            hide-details
+            multiple
+            @update:modelValue="setPotions"
+          />
+        </template>
+        <template #append>
+          <v-icon style="color: deeppink">mdi-bottle-tonic</v-icon>
+          {{ activePotions.length }}
+          {{ activePotions.length === 1 ? 'potion' : 'potions' }} active
+        </template>
+      </v-card>
+    </v-col>
+    <v-col cols="12" sm="6" md="4">
+      <v-card>
+        <template #title>Health</template>
+        <template #text>
+          <v-slider v-model="health" :min="1" :max="300" :step="1" />
+        </template>
+        <template #append>
+          <v-icon style="color: red">mdi-heart</v-icon>
+          {{ health }} Health
+        </template>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
