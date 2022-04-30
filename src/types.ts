@@ -106,3 +106,41 @@ export interface Potion {
    */
   tenacityModifiers: TenacityModifier[];
 }
+
+export interface Ability {
+  /**
+   * Name of the ability.
+   */
+  name: string;
+  /**
+   * `attacks` contains all attacks this particular ability will do. Most
+   * abilities only contain one attack, but some deal multiple types of damage
+   * and therefore have multiple attacks.
+   */
+  attacks: {
+    type: DamageType;
+    damage: number;
+  }[];
+}
+[];
+
+/**
+ * `Creature` describes a specific creature.
+ */
+export interface Creature {
+  /**
+   * `name` of the creature.
+   */
+  name: string;
+  /**
+   * `maxLevel` determines the maximum level of the creature. Most creatures max
+   * level is either 0 or 2. Level 1 multiplies all damage dealt by 1.5, level 2
+   * by 2.
+   */
+  maxLevel: number;
+  /**
+   * `abilities` contains all abilities (attacks/attack combos) this creature
+   * can perform.
+   */
+  abilities: Ability[];
+}

@@ -9,7 +9,9 @@ import {
   NMenu,
   MenuOption,
 } from 'naive-ui';
-import { Breakpoints } from 'naive-ui/lib/config-provider/src/internal-interface';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const activeKey = ref<string | null>(null);
 const menuOptions = ref<MenuOption[]>([
@@ -29,11 +31,14 @@ const menuOptions = ref<MenuOption[]>([
     <n-space vertical size="large">
       <n-layout>
         <n-layout-header>
-          <n-menu
-            v-model:value="activeKey"
-            mode="horizontal"
-            :options="menuOptions"
-          />
+          <router-link to="/">Calculate</router-link>
+          <br />
+          <router-link to="/character">Character</router-link>
+          <!--          <n-menu-->
+          <!--            v-model:value="activeKey"-->
+          <!--            mode="horizontal"-->
+          <!--            :options="menuOptions"-->
+          <!--          />-->
         </n-layout-header>
         <n-layout-content content-style="padding: 24px;">
           <router-view />
