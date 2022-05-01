@@ -1,9 +1,10 @@
-import { Creature, DamageType } from '../types';
+import { Biome, Creature, DamageType } from '../types';
 
 export const creatures: Creature[] = [
   {
     name: 'Boar',
     maxLevel: 2,
+    biome: Biome.Meadows,
     abilities: [
       {
         name: 'Charge and retreat',
@@ -14,6 +15,7 @@ export const creatures: Creature[] = [
   {
     name: 'Neck',
     maxLevel: 2,
+    biome: Biome.Meadows,
     abilities: [
       {
         name: 'Bite',
@@ -24,6 +26,7 @@ export const creatures: Creature[] = [
   {
     name: 'Greyling',
     maxLevel: 0,
+    biome: Biome.Meadows,
     abilities: [
       {
         name: 'Melee',
@@ -34,6 +37,7 @@ export const creatures: Creature[] = [
   {
     name: 'Greydwarf',
     maxLevel: 2,
+    biome: Biome.BlackForest,
     abilities: [
       {
         name: 'Melee',
@@ -48,6 +52,7 @@ export const creatures: Creature[] = [
   {
     name: 'Greydwarf brute',
     maxLevel: 2,
+    biome: Biome.BlackForest,
     abilities: [
       {
         name: 'Slash',
@@ -58,6 +63,7 @@ export const creatures: Creature[] = [
   {
     name: 'Greydwarf shaman',
     maxLevel: 2,
+    biome: Biome.BlackForest,
     abilities: [
       {
         name: 'Melee',
@@ -72,6 +78,7 @@ export const creatures: Creature[] = [
   {
     name: 'Troll',
     maxLevel: 2,
+    biome: Biome.BlackForest,
     abilities: [
       {
         name: 'Punch / Log swing',
@@ -90,6 +97,7 @@ export const creatures: Creature[] = [
   {
     name: 'Ghost',
     maxLevel: 0,
+    biome: Biome.BlackForest,
     abilities: [
       {
         name: 'Melee',
@@ -100,6 +108,7 @@ export const creatures: Creature[] = [
   {
     name: 'Skeleton',
     maxLevel: 2,
+    biome: Biome.BlackForest,
     abilities: [
       {
         name: 'Sword',
@@ -114,6 +123,7 @@ export const creatures: Creature[] = [
   {
     name: 'Rancid remains',
     maxLevel: 2,
+    biome: Biome.BlackForest,
     abilities: [
       {
         name: 'Melee',
@@ -125,8 +135,9 @@ export const creatures: Creature[] = [
     ],
   },
   {
-    name: 'Root',
+    name: 'Root (from The Elder)',
     maxLevel: 2,
+    biome: Biome.BlackForest,
     abilities: [
       {
         name: 'Melee',
@@ -137,6 +148,7 @@ export const creatures: Creature[] = [
   {
     name: 'Abomination',
     maxLevel: 0,
+    biome: Biome.Swamp,
     abilities: [
       {
         name: '???1',
@@ -155,6 +167,7 @@ export const creatures: Creature[] = [
   {
     name: 'Blob',
     maxLevel: 0,
+    biome: Biome.Swamp,
     abilities: [
       {
         name: 'Poison AoE',
@@ -165,6 +178,7 @@ export const creatures: Creature[] = [
   {
     name: 'Oozer',
     maxLevel: 0,
+    biome: Biome.Swamp,
     abilities: [
       {
         name: 'Poison AoE',
@@ -175,6 +189,7 @@ export const creatures: Creature[] = [
   {
     name: 'Draugr',
     maxLevel: 2,
+    biome: Biome.Swamp,
     abilities: [
       {
         name: 'Axe',
@@ -189,6 +204,7 @@ export const creatures: Creature[] = [
   {
     name: 'Draugr elite',
     maxLevel: 2,
+    biome: Biome.Swamp,
     abilities: [
       {
         name: 'Melee',
@@ -199,6 +215,7 @@ export const creatures: Creature[] = [
   {
     name: 'Leech',
     maxLevel: 2,
+    biome: Biome.Swamp,
     abilities: [
       {
         name: 'Bite',
@@ -212,6 +229,7 @@ export const creatures: Creature[] = [
   {
     name: 'Surtling',
     maxLevel: 2,
+    biome: Biome.Swamp,
     abilities: [
       {
         name: 'Fireball',
@@ -225,6 +243,7 @@ export const creatures: Creature[] = [
   {
     name: 'Wraith',
     maxLevel: 0,
+    biome: Biome.Swamp,
     abilities: [
       {
         name: 'Melee',
@@ -235,6 +254,7 @@ export const creatures: Creature[] = [
   {
     name: 'Wolf',
     maxLevel: 2,
+    biome: Biome.Mountain,
     abilities: [
       {
         name: 'Bite',
@@ -245,6 +265,7 @@ export const creatures: Creature[] = [
   {
     name: 'Drake',
     maxLevel: 0,
+    biome: Biome.Mountain,
     abilities: [
       {
         name: 'Frost ball (3x)',
@@ -255,6 +276,7 @@ export const creatures: Creature[] = [
   {
     name: 'Fenring',
     maxLevel: 0,
+    biome: Biome.Mountain,
     abilities: [
       {
         name: 'Melee',
@@ -269,6 +291,7 @@ export const creatures: Creature[] = [
   {
     name: 'Stone Golem',
     maxLevel: 0,
+    biome: Biome.Mountain,
     abilities: [
       {
         name: 'Sledge (Slam/Double Smash)',
@@ -283,6 +306,7 @@ export const creatures: Creature[] = [
   {
     name: 'Bat',
     maxLevel: 0,
+    biome: Biome.Mountain,
     abilities: [
       {
         name: '???',
@@ -293,6 +317,7 @@ export const creatures: Creature[] = [
   {
     name: 'Ulv',
     maxLevel: 0,
+    biome: Biome.Mountain,
     abilities: [
       {
         name: '???1',
@@ -307,6 +332,7 @@ export const creatures: Creature[] = [
   {
     name: 'Cultist',
     maxLevel: 0,
+    biome: Biome.Mountain,
     abilities: [
       {
         name: 'Stream of flame',
@@ -321,6 +347,7 @@ export const creatures: Creature[] = [
   {
     name: 'Deathsquito',
     maxLevel: 0,
+    biome: Biome.Plains,
     abilities: [
       {
         name: 'Charge and retreat',
@@ -331,6 +358,7 @@ export const creatures: Creature[] = [
   {
     name: 'Lox',
     maxLevel: 0,
+    biome: Biome.Plains,
     abilities: [
       {
         name: 'Bite',
@@ -345,6 +373,7 @@ export const creatures: Creature[] = [
   {
     name: 'Fuling',
     maxLevel: 2,
+    biome: Biome.Plains,
     abilities: [
       {
         name: 'Club',
@@ -370,6 +399,7 @@ export const creatures: Creature[] = [
   {
     name: 'Fuling berserker',
     maxLevel: 2,
+    biome: Biome.Plains,
     abilities: [
       {
         name: 'Melee',
@@ -384,6 +414,7 @@ export const creatures: Creature[] = [
   {
     name: 'Fuling shaman',
     maxLevel: 0,
+    biome: Biome.Plains,
     abilities: [
       {
         name: 'Melee',
@@ -401,6 +432,7 @@ export const creatures: Creature[] = [
   {
     name: 'Growth',
     maxLevel: 0,
+    biome: Biome.Plains,
     abilities: [
       {
         name: 'Ranged (6x)',
@@ -414,6 +446,7 @@ export const creatures: Creature[] = [
   {
     name: 'Serpent',
     maxLevel: 0,
+    biome: Biome.Plains,
     abilities: [
       {
         name: 'Bite',
@@ -421,8 +454,125 @@ export const creatures: Creature[] = [
       },
     ],
   },
+  {
+    name: 'Eikthyr (boss)',
+    maxLevel: 0,
+    biome: Biome.Meadows,
+    abilities: [
+      {
+        name: 'Melee',
+        attacks: [{ type: DamageType.Pierce, damage: 20 }],
+      },
+      {
+        name: 'Lightning bolt',
+        attacks: [{ type: DamageType.Lightning, damage: 15 }],
+      },
+      {
+        name: 'Stomp',
+        attacks: [{ type: DamageType.Lightning, damage: 15 }],
+      },
+    ],
+  },
+  {
+    name: 'The Elder (boss)',
+    maxLevel: 0,
+    biome: Biome.BlackForest,
+    abilities: [
+      {
+        name: 'Vine Shoot',
+        attacks: [{ type: DamageType.Pierce, damage: 35 }],
+      },
+      {
+        name: 'Stomp',
+        attacks: [{ type: DamageType.Blunt, damage: 60 }],
+      },
+    ],
+  },
+  {
+    name: 'Bonemass (boss)',
+    maxLevel: 0,
+    biome: Biome.Swamp,
+    abilities: [
+      {
+        name: 'Melee',
+        attacks: [{ type: DamageType.Blunt, damage: 80 }],
+      },
+      {
+        name: 'AoE (unblockable)',
+        attacks: [{ type: DamageType.Poison, damage: 130 }],
+      },
+    ],
+  },
+  {
+    name: 'Moder (boss)',
+    maxLevel: 0,
+    biome: Biome.Mountain,
+    abilities: [
+      {
+        name: 'Barrage',
+        attacks: [{ type: DamageType.Pierce, damage: 30 }],
+      },
+      {
+        name: 'Melee',
+        attacks: [{ type: DamageType.Slash, damage: 110 }],
+      },
+      {
+        name: 'Breath',
+        attacks: [{ type: DamageType.Frost, damage: 200 }],
+      },
+    ],
+  },
+  {
+    name: 'Yagluth (boss)',
+    maxLevel: 0,
+    biome: Biome.Plains,
+    abilities: [
+      {
+        name: 'Nova',
+        attacks: [
+          { type: DamageType.Fire, damage: 65 },
+          { type: DamageType.Lightning, damage: 65 },
+        ],
+      },
+      {
+        name: 'Fire breath',
+        attacks: [
+          { type: DamageType.Fire, damage: 40 },
+          { type: DamageType.Lightning, damage: 20 },
+        ],
+      },
+      {
+        name: 'Meteors',
+        attacks: [
+          { type: DamageType.Blunt, damage: 50 },
+          { type: DamageType.Fire, damage: 120 },
+        ],
+      },
+    ],
+  },
 ];
 
 export function creatureOptions() {
-  return creatures.map(({ name }) => name);
+  // const items = [];
+  //
+  // for (const biome of [Biome.Meadows, Biome.BlackForest, Biome.Swamp]) {
+  //   items.push({
+  //     header: biome,
+  //     divider: true,
+  //   });
+  //
+  //   items.push(
+  //     ...creatures
+  //       .filter((x) => x.biome === biome)
+  //       .map(({ name }) => ({
+  //         title: name,
+  //         value: name,
+  //       }))
+  //   );
+  // }
+
+  return creatures.map(({ name, biome }) => ({
+    title: `${name} [${biome}]`,
+    value: name,
+  }));
 }

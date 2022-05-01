@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useStore } from 'vuex';
 import { foodOptions } from '../data/foods';
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { Food, FoodDecay } from '../types';
 import { LineChart } from 'vue-chart-3';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
@@ -14,26 +14,11 @@ function getFoodOptions() {
   return foodOptions();
 }
 
-const activeFoods = computed({
-  get() {
-    return store.state.activeFoods;
-  },
-  set(val) {
-    store.state.activeFoods = val;
-  },
-});
+const activeFoods = computed(() => store.state.activeFoods);
 
-const foodHealth = computed(() => {
-  return (store.getters.foodItems as Food[])
-    .map(({ health }) => health)
-    .reduce((sum, a) => sum + a, 0);
-});
+const foodHealth = computed(() => store.getters.foodHealth);
 
-const foodStamina = computed(() => {
-  return (store.getters.foodItems as Food[])
-    .map(({ stamina }) => stamina)
-    .reduce((sum, a) => sum + a, 0);
-});
+const foodStamina = computed(() => store.getters.foodStamina);
 
 const foodDecay = computed(() => {
   const foods = store.getters.foodItems as Food[];
@@ -94,13 +79,21 @@ const chartOptions = computed<ChartOptions>(() => ({
     },
   },
 }));
+
+watch(
+  () => activeFoods.value,
+  () => {
+    // store.state.activeFoods = [...activeFoods.value];
+  },
+  { deep: true }
+);
 </script>
 
 <template>
   <v-row>
     <v-col cols="12">
       <v-card>
-        <template #title>Food selection</template>
+        <template #title>Food</template>
         <template #append>
           <v-icon style="color: red">mdi-heart</v-icon>
           25 + {{ foodHealth }}
@@ -109,10 +102,11 @@ const chartOptions = computed<ChartOptions>(() => ({
         </template>
         <template #text>
           <v-select
-            v-model="activeFoods"
+            :model-value="activeFoods"
             :items="getFoodOptions()"
             label="Food"
             hide-details
+            chips
             multiple
           />
         </template>

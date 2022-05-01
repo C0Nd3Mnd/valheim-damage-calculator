@@ -2,7 +2,7 @@ import { App } from 'vue';
 import { createStore } from 'vuex';
 import VuexPersistence from 'vuex-persist';
 import { armor, armorSets, pieceByName } from '../data/armor';
-import { ArmorPiece, Tenacity, TenacityModifier } from '../types';
+import { ArmorPiece, Food, Tenacity, TenacityModifier } from '../types';
 import { potions } from '../data/potions';
 import { foods } from '../data/foods';
 
@@ -202,6 +202,16 @@ export function setupStore(app: App) {
         }
 
         return items;
+      },
+      foodHealth(state, getters) {
+        return (getters.foodItems as Food[])
+          .map(({ health }) => health)
+          .reduce((sum, a) => sum + a, 0);
+      },
+      foodStamina(state, getters) {
+        return (getters.foodItems as Food[])
+          .map(({ stamina }) => stamina)
+          .reduce((sum, a) => sum + a, 0);
       },
     },
     mutations: {

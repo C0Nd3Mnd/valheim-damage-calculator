@@ -52,6 +52,8 @@ const health = computed({
   },
 });
 
+const foodHealth = computed(() => store.getters.foodHealth);
+
 // TODO Move to separate file.
 const armorLabels = ref({
   [ArmorPiece.Helmet]: 'Helmet',
@@ -116,7 +118,6 @@ const armorLabels = ref({
         <template #append>
           <v-icon style="color: deeppink">mdi-bottle-tonic</v-icon>
           {{ activePotions.length }}
-          {{ activePotions.length === 1 ? 'potion/power' : 'potions/powers' }}
           active
         </template>
       </v-card>
@@ -125,12 +126,22 @@ const armorLabels = ref({
       <v-card>
         <template #title>Health</template>
         <template #text>
-          <v-slider v-model="health" :min="1" :max="225" :step="1" />
+          <v-slider
+            v-model="health"
+            :min="1"
+            :max="225"
+            :step="1"
+            hide-details
+          />
         </template>
         <template #append>
           <v-icon style="color: red">mdi-heart</v-icon>
           {{ health }} Health
         </template>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn @click="health = foodHealth + 25">Apply from food</v-btn>
+        </v-card-actions>
       </v-card>
     </v-col>
   </v-row>

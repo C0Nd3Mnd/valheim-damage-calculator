@@ -139,6 +139,10 @@ export interface Creature {
    */
   maxLevel: number;
   /**
+   * `biome` specifies which biome the creature (primarily) belongs to.
+   */
+  biome: Biome;
+  /**
    * `abilities` contains all abilities (attacks/attack combos) this creature
    * can perform.
    */
@@ -167,8 +171,34 @@ export interface Food {
   duration: number;
 }
 
+/**
+ * `FoodDecay` can be used to map a certain point in time after eating food to
+ * an amount of bonus health and stamina still granted by the food at that point
+ * in time.
+ */
 export interface FoodDecay {
+  /**
+   * `time` in seconds after eating the food.
+   */
   time: number;
+  /**
+   * `health` is the remaining bonus health the food gives.
+   */
   health: number;
+  /**
+   * `stamina` is the remaining bonus stamina the food gives.
+   */
   stamina: number;
+}
+
+/**
+ * `Biome` is a list of biomes.
+ */
+export enum Biome {
+  Meadows = 'Meadows',
+  BlackForest = 'Black Forest',
+  Swamp = 'Swamp',
+  Mountain = 'Mountain',
+  Plains = 'Plains',
+  Ocean = 'Ocean',
 }
