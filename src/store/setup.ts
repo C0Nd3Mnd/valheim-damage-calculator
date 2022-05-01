@@ -4,6 +4,7 @@ import VuexPersistence from 'vuex-persist';
 import { armor, armorSets, pieceByName } from '../data/armor';
 import { ArmorPiece, Tenacity, TenacityModifier } from '../types';
 import { potions } from '../data/potions';
+import { foods } from '../data/foods';
 
 function random(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -37,6 +38,7 @@ export function setupStore(app: App) {
       },
       activePotions: [] as string[],
       health: 25,
+      activeFoods: [] as string[],
     }),
     getters: {
       armorByPiece(state) {
@@ -185,6 +187,21 @@ export function setupStore(app: App) {
         }
 
         return reducedModifiers;
+      },
+      foodItems(state) {
+        const items = [];
+
+        for (const name of state.activeFoods) {
+          const food = foods.find((x) => x.name === name);
+
+          if (!food) {
+            continue;
+          }
+
+          items.push(food);
+        }
+
+        return items;
       },
     },
     mutations: {

@@ -2,7 +2,7 @@
 import { useStore } from 'vuex';
 import { computed, ref } from 'vue';
 import { armorOptions } from '../data/armor';
-import { ArmorPiece, DamageType, Tenacity, TenacityModifier } from '../types';
+import { ArmorPiece } from '../types';
 import { potionOptions } from '../data/potions';
 
 const store = useStore();
@@ -30,14 +30,17 @@ function setLevel(piece: ArmorPiece, level: number) {
 const armorByPiece = computed(() => store.getters.armorByPiece);
 const maxLevels = computed(() => store.getters.maxLevels);
 
-const activePotions = computed(() => store.state.activePotions);
+const activePotions = computed({
+  get() {
+    return store.state.activePotions;
+  },
+  set(val) {
+    store.state.activePotions = val;
+  },
+});
 
 function getPotionOptions() {
   return potionOptions();
-}
-
-function setPotions(potions: string[]) {
-  store.commit('setPotions', potions);
 }
 
 const health = computed({
@@ -103,20 +106,17 @@ const armorLabels = ref({
         <template #title>Potions and Powers</template>
         <template #text>
           <v-select
-            :model-value="activePotions"
+            v-model="activePotions"
             :items="getPotionOptions()"
             label="Potions"
             hide-details
             multiple
-            @update:modelValue="setPotions"
           />
         </template>
         <template #append>
           <v-icon style="color: deeppink">mdi-bottle-tonic</v-icon>
           {{ activePotions.length }}
-          {{
-            activePotions.length === 1 ? 'potion/power' : 'potions/powers'
-          }}
+          {{ activePotions.length === 1 ? 'potion/power' : 'potions/powers' }}
           active
         </template>
       </v-card>

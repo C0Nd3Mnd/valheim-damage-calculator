@@ -21,9 +21,14 @@ const navigation = computed(() => [
     title: 'Creatures',
   },
   {
-    to: '/character',
-    icon: 'mdi-account',
-    title: 'Character',
+    to: '/equipment',
+    icon: 'mdi-hammer-wrench',
+    title: 'Equipment',
+  },
+  {
+    to: '/food',
+    icon: 'mdi-food',
+    title: 'Food',
   },
   {
     to: '/about',

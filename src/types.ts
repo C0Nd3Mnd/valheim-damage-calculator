@@ -144,3 +144,31 @@ export interface Creature {
    */
   abilities: Ability[];
 }
+
+/**
+ * `Food` describes a specific food item.
+ */
+export interface Food {
+  /**
+   * `name` is the name of the food.
+   */
+  name: string;
+  /**
+   * `health` specifies the amount of health the food grants.
+   */
+  health: number;
+  /**
+   * `stamina` specifies the amount of stamina the food grants.
+   */
+  stamina: number;
+  /**
+   * `duration` specifies the duration (in seconds) the food lasts for.
+   */
+  duration: number;
+}
+
+export interface FoodDecay {
+  time: number;
+  health: number;
+  stamina: number;
+}
