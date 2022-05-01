@@ -28,6 +28,40 @@ export const potions: Potion[] = [
       },
     ],
   },
+  {
+    name: 'Bonemass Power',
+    tenacityModifiers: [
+      {
+        type: DamageType.Blunt,
+        tenacity: Tenacity.Resistant,
+      },
+      {
+        type: DamageType.Slash,
+        tenacity: Tenacity.Resistant,
+      },
+      {
+        type: DamageType.Pierce,
+        tenacity: Tenacity.Resistant,
+      },
+    ],
+  },
+  {
+    name: 'Yagluth Power',
+    tenacityModifiers: [
+      {
+        type: DamageType.Fire,
+        tenacity: Tenacity.Resistant,
+      },
+      {
+        type: DamageType.Frost,
+        tenacity: Tenacity.Resistant,
+      },
+      {
+        type: DamageType.Lightning,
+        tenacity: Tenacity.Resistant,
+      },
+    ],
+  },
 ];
 
 export function potionOptions() {

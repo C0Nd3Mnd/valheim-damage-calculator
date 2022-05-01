@@ -9,6 +9,19 @@
     "build-gh": "npm run build -- --base=/valheim-damage-calculator/",
     "preview": "vite preview"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/C0Nd3Mnd/valheim-damage-calculator.git"
+  },
+  "keywords": [
+    "valheim"
+  ],
+  "author": "C0Nd3Mnd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/C0Nd3Mnd/valheim-damage-calculator/issues"
+  },
+  "homepage": "https://github.com/C0Nd3Mnd/valheim-damage-calculator#readme",
   "dependencies": {
     "@mdi/font": "^6.6.96",
     "vue": "^3.2.25",

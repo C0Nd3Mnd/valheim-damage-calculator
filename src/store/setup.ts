@@ -2,7 +2,7 @@ import { App } from 'vue';
 import { createStore } from 'vuex';
 import VuexPersistence from 'vuex-persist';
 import { armor, armorSets, pieceByName } from '../data/armor';
-import { ArmorPiece, TenacityModifier } from '../types';
+import { ArmorPiece, Tenacity, TenacityModifier } from '../types';
 import { potions } from '../data/potions';
 
 function random(min: number, max: number) {
@@ -162,7 +162,21 @@ export function setupStore(app: App) {
           );
 
           if (reducedModifier) {
-            if (modifier.tenacity < reducedModifier.tenacity) {
+            // Tenacity priority:
+            // {@link Tenacity.Immunity}
+            // {@link Tenacity.VeryResistant}
+            // {@link Tenacity.Resistant}
+            // {@link Tenacity.VeryWeak}
+            // {@link Tenacity.Weak}
+            // {@link Tenacity.Neutral}
+            if (reducedModifier.tenacity === Tenacity.Neutral) {
+              reducedModifier.tenacity = modifier.tenacity;
+            } else if (
+              reducedModifier.tenacity === Tenacity.Weak &&
+              modifier.tenacity === Tenacity.VeryWeak
+            ) {
+              reducedModifier.tenacity = modifier.tenacity;
+            } else if (modifier.tenacity < reducedModifier.tenacity) {
               reducedModifier.tenacity = modifier.tenacity;
             }
           } else {

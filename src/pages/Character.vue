@@ -100,7 +100,7 @@ const armorLabels = ref({
     </v-col>
     <v-col cols="12" sm="6" md="4">
       <v-card>
-        <template #title>Potions</template>
+        <template #title>Potions and Powers</template>
         <template #text>
           <v-select
             :model-value="activePotions"
@@ -114,7 +114,10 @@ const armorLabels = ref({
         <template #append>
           <v-icon style="color: deeppink">mdi-bottle-tonic</v-icon>
           {{ activePotions.length }}
-          {{ activePotions.length === 1 ? 'potion' : 'potions' }} active
+          {{
+            activePotions.length === 1 ? 'potion/power' : 'potions/powers'
+          }}
+          active
         </template>
       </v-card>
     </v-col>
@@ -122,7 +125,7 @@ const armorLabels = ref({
       <v-card>
         <template #title>Health</template>
         <template #text>
-          <v-slider v-model="health" :min="1" :max="300" :step="1" />
+          <v-slider v-model="health" :min="1" :max="225" :step="1" />
         </template>
         <template #append>
           <v-icon style="color: red">mdi-heart</v-icon>
