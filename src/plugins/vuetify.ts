@@ -1,18 +1,29 @@
 import 'vuetify/styles';
-import { createVuetify } from 'vuetify';
+import { createVuetify, ThemeDefinition } from 'vuetify';
 import { App } from 'vue';
+
+const lightTheme: ThemeDefinition = {
+  dark: false,
+  colors: {
+    primary: '#b48e74',
+  },
+};
+
+const darkTheme: ThemeDefinition = {
+  dark: true,
+  colors: {
+    primary: '#b48e74',
+  },
+};
 
 export function setupVuetify(app: App) {
   const vuetify = createVuetify({
     theme: {
       themes: {
-        main: {
-          colors: {
-            primary: '#B48E74',
-          },
-        },
+        lightTheme,
+        darkTheme,
       },
-      defaultTheme: 'main',
+      defaultTheme: 'lightTheme',
     },
   });
 

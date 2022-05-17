@@ -4,8 +4,11 @@ import CharacterSummary from './components/CharacterSummary.vue';
 import { useRouter } from 'vue-router';
 import packageJSON from '../package.json';
 import { VALHEIM_VERSION } from './data/version';
+import { useDark } from '@vueuse/core';
 
 const router = useRouter();
+
+const isDark = useDark();
 
 const title = computed(() => router.currentRoute.value.meta.title);
 
@@ -39,7 +42,7 @@ const navigation = computed(() => [
 </script>
 
 <template>
-  <v-app>
+  <v-app :theme="isDark ? 'darkTheme' : 'lightTheme'">
     <v-app-bar color="primary" density="compact">
       <template #prepend>
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" />
