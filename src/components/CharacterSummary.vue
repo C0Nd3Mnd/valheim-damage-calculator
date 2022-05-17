@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { useStore } from 'vuex';
-import { DamageType, Tenacity, TenacityModifier } from '../types';
+import { DamageType, Tenacity } from '../types';
 import { computed } from 'vue';
+import { useCharacterStore } from '../store/character';
 
-const store = useStore();
+const store = useCharacterStore();
 
 function getDamageTypeTenacity(type: DamageType): string {
-  const modifier = (store.getters.activeModifiers as TenacityModifier[]).find(
-    (x) => x.type === type
-  );
+  const modifier = store.activeModifiers.find((x) => x.type === type);
 
   if (!modifier) {
     return Tenacity.Neutral * 100 + '%';
@@ -18,18 +16,18 @@ function getDamageTypeTenacity(type: DamageType): string {
 }
 
 const summaryElements = computed(() => {
-  const elements = [
+  return [
     {
       label: 'Total armor',
       icon: 'shield-sword-outline',
       color: 'dimgrey',
-      value: store.getters.totalArmor,
+      value: store.totalArmor,
     },
     {
       label: 'Health',
       icon: 'heart',
       color: 'red',
-      value: store.state.health,
+      value: store.health,
     },
     {
       label: 'Blunt modifier',
@@ -80,8 +78,6 @@ const summaryElements = computed(() => {
       value: getDamageTypeTenacity(DamageType.Lightning),
     },
   ];
-
-  return elements;
 });
 </script>
 

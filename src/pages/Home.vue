@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { useStore } from 'vuex';
 import { creatureOptions, creatures } from '../data/creatures';
 import { computed, ref } from 'vue';
 import { Ability, DamageType, TenacityModifier } from '../types';
+import { useCharacterStore } from '../store/character';
 
-const store = useStore();
+const characterStore = useCharacterStore();
 
 function multiplier(level: number) {
   return 1 + level * 0.5;
 }
 
 function calculateDamage(damage: number) {
-  if (damage / 2 > store.getters.totalArmor) {
-    return damage - store.getters.totalArmor;
+  if (damage / 2 > characterStore.totalArmor) {
+    return damage - characterStore.totalArmor;
   }
 
   return (
-    Math.round((damage / (store.getters.totalArmor * 4)) * damage * 100) / 100
+    Math.round((damage / (characterStore.totalArmor * 4)) * damage * 100) / 100
   );
 }
 
@@ -31,9 +31,9 @@ function damageAfterMitigations(ability: Ability, level: number) {
   let total = 0;
 
   for (const attack of ability.attacks) {
-    const modifier = (store.getters.activeModifiers as TenacityModifier[]).find(
-      (x) => x.type === attack.type
-    );
+    const modifier = (
+      characterStore.activeModifiers as TenacityModifier[]
+    ).find((x) => x.type === attack.type);
 
     if (!modifier) {
       total += attack.damage * multiplier(level);
@@ -47,7 +47,9 @@ function damageAfterMitigations(ability: Ability, level: number) {
 }
 
 function hitsToLethal(ability: Ability, level: number) {
-  return Math.ceil(store.state.health / damageAfterMitigations(ability, level));
+  return Math.ceil(
+    characterStore.health / damageAfterMitigations(ability, level)
+  );
 }
 
 function getCreatureOptions() {

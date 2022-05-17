@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { useStore } from 'vuex';
 import { foodOptions } from '../data/foods';
 import { computed, watch } from 'vue';
 import { Food, FoodDecay } from '../types';
 import { LineChart } from 'vue-chart-3';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
+import { useCharacterStore } from '../store/character';
 
 Chart.register(...registerables);
 
-const store = useStore();
+const store = useCharacterStore();
 
 function getFoodOptions() {
   return foodOptions();
 }
 
-const activeFoods = computed(() => store.state.activeFoods);
+const activeFoods = computed(() => store.activeFoods);
 
-const foodHealth = computed(() => store.getters.foodHealth);
+const foodHealth = computed(() => store.foodHealth);
 
-const foodStamina = computed(() => store.getters.foodStamina);
+const foodStamina = computed(() => store.foodStamina);
 
 const foodDecay = computed(() => {
-  const foods = store.getters.foodItems as Food[];
+  const foods = store.foodItems as Food[];
 
   const points: FoodDecay[] = [];
 
@@ -79,14 +79,6 @@ const chartOptions = computed<ChartOptions>(() => ({
     },
   },
 }));
-
-watch(
-  () => activeFoods.value,
-  () => {
-    // store.state.activeFoods = [...activeFoods.value];
-  },
-  { deep: true }
-);
 </script>
 
 <template>

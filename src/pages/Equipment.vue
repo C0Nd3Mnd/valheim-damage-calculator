@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useStore } from 'vuex';
 import { computed, ref } from 'vue';
 import { armorOptions } from '../data/armor';
 import { ArmorPiece } from '../types';
 import { potionOptions } from '../data/potions';
+import { useCharacterStore } from '../store/character';
 
-const store = useStore();
+const store = useCharacterStore();
 
 function getName(piece: ArmorPiece) {
-  return store.state[piece].name;
+  return store[piece].name;
 }
 
 function getArmorOptions(piece: ArmorPiece) {
@@ -16,26 +16,26 @@ function getArmorOptions(piece: ArmorPiece) {
 }
 
 function setArmor(piece: ArmorPiece, name: string) {
-  store.commit('setArmor', { piece, name });
+  store.setArmor(piece, name);
 }
 
 function getLevel(piece: ArmorPiece) {
-  return store.state[piece].level + 1;
+  return store[piece].level + 1;
 }
 
 function setLevel(piece: ArmorPiece, level: number) {
-  store.commit('setLevel', { piece, level: level - 1 });
+  store.setLevel(piece, level - 1);
 }
 
-const armorByPiece = computed(() => store.getters.armorByPiece);
-const maxLevels = computed(() => store.getters.maxLevels);
+const armorByPiece = computed(() => store.armorByPiece);
+const maxLevels = computed(() => store.maxLevels);
 
 const activePotions = computed({
   get() {
-    return store.state.activePotions;
+    return store.activePotions;
   },
-  set(val) {
-    store.state.activePotions = val;
+  set(val: string[]) {
+    store.activePotions = val;
   },
 });
 
@@ -45,14 +45,14 @@ function getPotionOptions() {
 
 const health = computed({
   get() {
-    return store.state.health;
+    return store.health;
   },
   set(val: number) {
-    store.state.health = val;
+    store.health = val;
   },
 });
 
-const foodHealth = computed(() => store.getters.foodHealth);
+const foodHealth = computed(() => store.foodHealth);
 
 // TODO Move to separate file.
 const armorLabels = ref({
