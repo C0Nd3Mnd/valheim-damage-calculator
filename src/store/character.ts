@@ -3,29 +3,31 @@ import { ArmorPiece, Food, Tenacity, TenacityModifier } from '../types';
 import { armorSets, pieceByName } from '../data/armor';
 import { potions } from '../data/potions';
 import { foods } from '../data/foods';
+import { computed, reactive, ref } from 'vue';
+import { useLocalStorage } from '@vueuse/core';
 
 export const useCharacterStore = defineStore({
   id: 'character',
   state: () => ({
-    [ArmorPiece.Helmet]: {
+    [ArmorPiece.Helmet]: useLocalStorage('character.helmet', {
       name: '',
       level: 0,
-    },
-    [ArmorPiece.Chest]: {
+    }),
+    [ArmorPiece.Chest]: useLocalStorage('character.chest', {
       name: '',
       level: 0,
-    },
-    [ArmorPiece.Leg]: {
+    }),
+    [ArmorPiece.Leg]: useLocalStorage('character.leg', {
       name: '',
       level: 0,
-    },
-    [ArmorPiece.Cape]: {
+    }),
+    [ArmorPiece.Cape]: useLocalStorage('character.cape', {
       name: '',
       level: 0,
-    },
-    activePotions: [] as string[],
-    health: 25,
-    activeFoods: [] as string[],
+    }),
+    activePotions: useLocalStorage('character.activePotions', [] as string[]),
+    health: useLocalStorage('character.health', 25),
+    activeFoods: useLocalStorage('character.activeFoods', [] as string[]),
   }),
   getters: {
     armorByPiece(state) {

@@ -24,6 +24,7 @@
   "homepage": "https://github.com/C0Nd3Mnd/valheim-damage-calculator#readme",
   "dependencies": {
     "@mdi/font": "^6.6.96",
+    "@vueuse/core": "^8.5.0",
     "chart.js": "^3.7.1",
     "pinia": "^2.0.14",
     "vue": "^3.2.25",
