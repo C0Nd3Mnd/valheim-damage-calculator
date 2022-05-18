@@ -5,6 +5,36 @@ import { potions } from '../data/potions';
 import { foods } from '../data/foods';
 import { computed, reactive, ref } from 'vue';
 import { useLocalStorage } from '@vueuse/core';
+import { $computed } from 'vue/macros';
+
+// export const newChStoreTmp = defineStore('tmpch', () => {
+//   const pieces = $ref(
+//     useLocalStorage('character.pieces', {
+//       helmet: { name: '', level: 0 },
+//       chest: { name: '', level: 0 },
+//       leg: { name: '', level: 0 },
+//       cape: { name: '', level: 0 },
+//     })
+//   );
+//
+//   const activePotions: string[] = $ref(
+//     useLocalStorage('character.activePotions', [])
+//   );
+//
+//   const activeFoods: string[] = $ref(
+//     useLocalStorage('character.activeFoods', [])
+//   );
+//
+//   let health = $ref(useLocalStorage('character.health', 25));
+//
+//   const armorByPiece = $computed(() => {
+//     const foo = {};
+//
+//     for (const keyof Object.keys(pieces)) {
+//       foo[key] = (pieces[key].name)?.levels[pieces[key].level] || 0
+//     }
+//   });
+// });
 
 export const useCharacterStore = defineStore({
   id: 'character',

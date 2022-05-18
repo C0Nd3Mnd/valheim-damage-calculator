@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { creatureOptions, creatures } from '../data/creatures';
+import { useRoute } from 'vue-router';
+import { creatures } from '../data/creatures';
 import { computed, ref } from 'vue';
-import { Ability, DamageType, TenacityModifier } from '../types';
+import { Ability, DamageType } from '../types';
 import { useCharacterStore } from '../store/character';
 
 const characterStore = useCharacterStore();
+
+const route = useRoute();
+
+const { name } = route.params;
+
+const creature = computed(() => creatures.find((c) => c.name === name));
 
 function multiplier(level: number) {
   return 1 + level * 0.5;
@@ -17,6 +24,12 @@ function calculateDamage(damage: number) {
 
   return (
     Math.round((damage / (characterStore.totalArmor * 4)) * damage * 100) / 100
+  );
+}
+
+function hitsToLethal(ability: Ability, level: number) {
+  return Math.ceil(
+    characterStore.health / damageAfterMitigations(ability, level)
   );
 }
 
@@ -46,21 +59,6 @@ function damageAfterMitigations(ability: Ability, level: number) {
   return calculateDamage(total);
 }
 
-function hitsToLethal(ability: Ability, level: number) {
-  return Math.ceil(
-    characterStore.health / damageAfterMitigations(ability, level)
-  );
-}
-
-function getCreatureOptions() {
-  return creatureOptions();
-}
-
-const creatureName = ref('');
-const creature = computed(() =>
-  creatures.find(({ name }) => name === creatureName.value)
-);
-
 const damageTypeLabels = ref({
   [DamageType.Blunt]: 'Blunt',
   [DamageType.Pierce]: 'Pierce',
@@ -74,12 +72,7 @@ const damageTypeLabels = ref({
 </script>
 
 <template>
-  <h5 class="text-h5">Select Creature</h5>
-  <v-select
-    v-model="creatureName"
-    label="Creature"
-    :items="getCreatureOptions()"
-  />
+  <h5 class="text-h5">{{ name }}</h5>
   <template v-if="creature">
     <v-table>
       <thead>
@@ -95,7 +88,7 @@ const damageTypeLabels = ref({
         <template v-for="i in creature.maxLevel + 1">
           <tr>
             <th class="text-subtitle-1" colspan="5">
-              Level {{ i - 1 }} {{ creatureName }}
+              Level {{ i - 1 }} {{ name }}
             </th>
           </tr>
           <tr v-for="ability in creature.abilities" :key="ability.name">

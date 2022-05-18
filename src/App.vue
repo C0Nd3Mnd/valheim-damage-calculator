@@ -19,7 +19,7 @@ const valheimVersion = computed(() => VALHEIM_VERSION);
 
 const navigation = computed(() => [
   {
-    to: '/',
+    to: '/creatures',
     icon: 'mdi-pig-variant',
     title: 'Creatures',
   },
