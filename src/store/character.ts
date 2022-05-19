@@ -232,6 +232,13 @@ export const useCharacterStore = defineStore({
         .map(({ stamina }) => stamina)
         .reduce((sum, a) => sum + a, 0);
     },
+    /**
+     * `foodMax` determines whether the food list ("stomach") is full.
+     * @param state
+     */
+    foodMax(state): boolean {
+      return this.activeFoods.length >= 3;
+    },
   },
   actions: {
     setArmor(piece: ArmorPiece, name: string) {
@@ -258,6 +265,28 @@ export const useCharacterStore = defineStore({
     },
     setPotions(potions: string[]) {
       this.activePotions = potions;
+    },
+    addFood(name: string) {
+      if (this.activeFoods.length >= 3) {
+        return;
+      }
+
+      const index = this.activeFoods.indexOf(name);
+
+      if (index > -1) {
+        return;
+      }
+
+      this.activeFoods.push(name);
+    },
+    removeFood(name: string) {
+      const index = this.activeFoods.indexOf(name);
+
+      if (index === -1) {
+        return;
+      }
+
+      this.activeFoods.splice(index, 1);
     },
   },
 });

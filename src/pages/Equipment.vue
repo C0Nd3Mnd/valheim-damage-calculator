@@ -11,10 +11,6 @@ function getName(piece: ArmorPiece) {
   return store[piece].name;
 }
 
-function getArmorOptions(piece: ArmorPiece) {
-  return armorOptions(piece);
-}
-
 function setArmor(piece: ArmorPiece, name: string) {
   store.setArmor(piece, name);
 }
@@ -26,18 +22,6 @@ function getLevel(piece: ArmorPiece) {
 function setLevel(piece: ArmorPiece, level: number) {
   store.setLevel(piece, level - 1);
 }
-
-const armorByPiece = computed(() => store.armorByPiece);
-const maxLevels = computed(() => store.maxLevels);
-
-const activePotions = computed({
-  get() {
-    return store.activePotions;
-  },
-  set(val: string[]) {
-    store.activePotions = val;
-  },
-});
 
 function getPotionOptions() {
   return potionOptions();
@@ -86,12 +70,12 @@ const armorLabels = ref({
             hide-details
             :model-value="getName(piece)"
             :label="armorLabels[piece]"
-            :items="getArmorOptions(piece)"
+            :items="armorOptions(piece)"
             @update:modelValue="setArmor(piece, $event)"
           />
           <v-rating
             :model-value="getLevel(piece)"
-            :length="maxLevels[piece]"
+            :length="store.maxLevels[piece]"
             color="#ffd700"
             hover
             @update:modelValue="setLevel(piece, $event)"
@@ -99,7 +83,7 @@ const armorLabels = ref({
         </template>
         <template #append>
           <v-icon style="color: dimgrey">mdi-shield-sword-outline</v-icon>
-          {{ armorByPiece[piece] }} Armor
+          {{ store.armorByPiece[piece] }} Armor
         </template>
       </v-card>
     </v-col>
@@ -108,7 +92,7 @@ const armorLabels = ref({
         <template #title>Potions and Powers</template>
         <template #text>
           <v-select
-            v-model="activePotions"
+            v-model="store.activePotions"
             :items="getPotionOptions()"
             label="Potions"
             hide-details
@@ -117,7 +101,7 @@ const armorLabels = ref({
         </template>
         <template #append>
           <v-icon style="color: deeppink">mdi-bottle-tonic</v-icon>
-          {{ activePotions.length }}
+          {{ store.activePotions.length }}
           active
         </template>
       </v-card>
@@ -129,7 +113,7 @@ const armorLabels = ref({
           <v-slider
             v-model="health"
             :min="1"
-            :max="225"
+            :max="250"
             :step="1"
             hide-details
           />

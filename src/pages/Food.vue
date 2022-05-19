@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { foodOptions } from '../data/foods';
+import { foodOptions, foods } from '../data/foods';
 import { computed, watch } from 'vue';
 import { Food, FoodDecay } from '../types';
 import { LineChart } from 'vue-chart-3';
@@ -10,9 +10,14 @@ Chart.register(...registerables);
 
 const store = useCharacterStore();
 
-function getFoodOptions() {
-  return foodOptions();
-}
+const foodCards = computed(() => {
+  return foods
+    .map((food) => ({
+      ...food,
+      selected: store.activeFoods.includes(food.name),
+    }))
+    .sort((a, b) => (a.selected > b.selected ? -1 : 1));
+});
 
 const foodDecay = computed(() => {
   const foods = store.foodItems as Food[];
@@ -76,32 +81,66 @@ const chartOptions = computed<ChartOptions>(() => ({
 </script>
 
 <template>
+  <h5 class="text-h5">Food</h5>
   <v-row>
     <v-col cols="12">
       <v-card>
-        <template #title>Food</template>
         <template #append>
           <v-icon style="color: red">mdi-heart</v-icon>
           25 + {{ store.foodHealth }}
           <v-icon style="color: goldenrod">mdi-run</v-icon>
           50 + {{ store.foodStamina }}
         </template>
-        <template #text>
-          <v-select
-            v-model="store.activeFoods"
-            :items="getFoodOptions()"
-            label="Food"
-            hide-details
-            chips
-            multiple
-          />
-        </template>
+        <v-card-text>
+          <LineChart :chart-data="foodChart" :options="chartOptions"
+        /></v-card-text>
       </v-card>
     </v-col>
-  </v-row>
-  <v-row>
-    <v-col cols="12">
-      <LineChart :chart-data="foodChart" :options="chartOptions" />
+    <v-col cols="12" sm="6" md="3" lg="2" v-for="card in foodCards">
+      <v-card :disabled="store.foodMax && !card.selected">
+        <v-card-title class="justify-center">
+          <v-avatar class="mr-2" :rounded="0">
+            <v-img :src="card.image" />
+          </v-avatar>
+          <span
+            style="
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            "
+          >
+            {{ card.name }}
+          </span>
+        </v-card-title>
+        <v-card-actions>
+          <span class="text-body-2 pl-2">
+            <v-icon style="color: red">mdi-heart</v-icon>
+            {{ card.health }}
+            <v-icon style="color: goldenrod">mdi-run</v-icon>
+            {{ card.stamina }}
+            <v-icon style="color: grey">mdi-timer</v-icon>
+            {{ card.duration }}s
+          </span>
+          <v-spacer />
+          <v-btn
+            v-if="card.selected"
+            icon
+            color="error"
+            @click="store.removeFood(card.name)"
+          >
+            <v-icon>mdi-minus-circle</v-icon>
+          </v-btn>
+          <v-btn
+            v-else
+            :disabled="store.foodMax"
+            icon
+            color="success"
+            @click="store.addFood(card.name)"
+          >
+            <v-icon>mdi-plus-circle</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
     </v-col>
   </v-row>
 </template>

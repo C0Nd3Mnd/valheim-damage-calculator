@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 import CharacterSummary from './components/CharacterSummary.vue';
 import { useRouter } from 'vue-router';
-import packageJSON from '../package.json';
+import { version } from '../package.json';
 import { VALHEIM_VERSION } from './data/version';
 import { useDark } from '@vueuse/core';
 
@@ -13,9 +13,6 @@ const isDark = useDark();
 const title = computed(() => router.currentRoute.value.meta.title);
 
 const drawer = ref<boolean | null>(null);
-
-const version = computed(() => packageJSON.version);
-const valheimVersion = computed(() => VALHEIM_VERSION);
 
 const navigation = computed(() => [
   {
@@ -51,7 +48,7 @@ const navigation = computed(() => [
       <template #extension>
         <span class="text-caption">Version {{ version }}</span>
         <v-spacer />
-        <span class="text-caption">for Valheim {{ valheimVersion }}</span>
+        <span class="text-caption">for Valheim {{ VALHEIM_VERSION }}</span>
       </template>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer">

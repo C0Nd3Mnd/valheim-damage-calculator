@@ -169,6 +169,10 @@ export interface Food {
    * `duration` specifies the duration (in seconds) the food lasts for.
    */
   duration: number;
+  /**
+   * `image` specifies the URL of a preview image.
+   */
+  image: string;
 }
 
 /**

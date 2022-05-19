@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import packageJSON from '../../package.json';
-import { computed } from 'vue';
+import { version } from '../../package.json';
 import { VALHEIM_VERSION } from '../data/version';
-
-const version = computed(() => packageJSON.version);
-const valheimVersion = computed(() => VALHEIM_VERSION);
 </script>
 
 <template>
   <p>
     Valheim Damage Calculator {{ version }}, made for Valheim version
-    {{ valheimVersion }}.
+    {{ VALHEIM_VERSION }}.
   </p>
   <p>
     Thank you to all the authors and maintainers of the
