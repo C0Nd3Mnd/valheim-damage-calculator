@@ -1,23 +1,42 @@
 <script setup lang="ts">
 import { foodOptions, foods } from '../data/foods';
-import { computed, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { Food, FoodDecay } from '../types';
 import { LineChart } from 'vue-chart-3';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 import { useCharacterStore } from '../store/character';
+import { $computed } from 'vue/macros';
 
 Chart.register(...registerables);
 
 const store = useCharacterStore();
 
-const foodCards = computed(() => {
+interface SelectableFood extends Food {
+  selected: boolean;
+}
+
+const foodCards = $computed<SelectableFood[]>(() => {
   return foods
     .map((food) => ({
       ...food,
       selected: store.activeFoods.includes(food.name),
     }))
-    .sort((a, b) => (a.selected > b.selected ? -1 : 1));
+    .sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1))
+    .sort((a, b) => (a.selected > b.selected ? -1 : 1))
+    .filter((x) =>
+      x.name.toLowerCase().replace(/ /g, '').includes(foodCardsFilter)
+    );
 });
+
+let foodCardsFilterTerm = $ref('');
+
+const foodCardsFilter = $computed(() =>
+  foodCardsFilterTerm.toLowerCase().replace(/\s/g, '')
+);
+
+function toggleFood(card: SelectableFood) {
+  return card.selected ? store.removeFood(card.name) : store.addFood(card.name);
+}
 
 const foodDecay = computed(() => {
   const foods = store.foodItems as Food[];
@@ -96,8 +115,51 @@ const chartOptions = computed<ChartOptions>(() => ({
         /></v-card-text>
       </v-card>
     </v-col>
-    <v-col cols="12" sm="6" md="3" lg="2" v-for="card in foodCards">
-      <v-card :disabled="store.foodMax && !card.selected">
+    <v-col cols="12">
+      <v-text-field v-model="foodCardsFilterTerm" label="Filter" hide-details />
+    </v-col>
+    <v-col cols="12" v-if="$vuetify.display.xs">
+      <v-list>
+        <v-list-item
+          v-for="card in foodCards"
+          :key="card.name"
+          :disabled="store.foodMax && !card.selected"
+          @click="toggleFood(card)"
+        >
+          <template #prepend>
+            <v-icon v-if="card.selected" color="error">mdi-minus-circle</v-icon>
+            <v-icon v-else color="success">mdi-plus-circle</v-icon>
+            <v-list-item-avatar class="mx-2">
+              <v-img :src="card.image" />
+            </v-list-item-avatar>
+          </template>
+          <v-list-item-header>
+            <v-list-item-title>{{ card.name }}</v-list-item-title>
+            <v-list-item-subtitle>
+              <v-icon style="color: red">mdi-heart</v-icon>
+              {{ card.health }}
+              <v-icon style="color: goldenrod">mdi-run</v-icon>
+              {{ card.stamina }}
+              <v-icon style="color: grey">mdi-timer</v-icon>
+              {{ card.duration }}s
+            </v-list-item-subtitle>
+          </v-list-item-header>
+        </v-list-item>
+      </v-list>
+    </v-col>
+    <v-col
+      v-else
+      v-for="card in foodCards"
+      :key="card.name"
+      cols="12"
+      sm="6"
+      md="3"
+      lg="2"
+    >
+      <v-card
+        :disabled="store.foodMax && !card.selected"
+        @click="toggleFood(card)"
+      >
         <v-card-title class="justify-center">
           <v-avatar class="mr-2" :rounded="0">
             <v-img :src="card.image" />
@@ -112,8 +174,8 @@ const chartOptions = computed<ChartOptions>(() => ({
             {{ card.name }}
           </span>
         </v-card-title>
-        <v-card-actions>
-          <span class="text-body-2 pl-2">
+        <v-card-actions class="px-4">
+          <span class="text-body-2">
             <v-icon style="color: red">mdi-heart</v-icon>
             {{ card.health }}
             <v-icon style="color: goldenrod">mdi-run</v-icon>
@@ -122,23 +184,8 @@ const chartOptions = computed<ChartOptions>(() => ({
             {{ card.duration }}s
           </span>
           <v-spacer />
-          <v-btn
-            v-if="card.selected"
-            icon
-            color="error"
-            @click="store.removeFood(card.name)"
-          >
-            <v-icon>mdi-minus-circle</v-icon>
-          </v-btn>
-          <v-btn
-            v-else
-            :disabled="store.foodMax"
-            icon
-            color="success"
-            @click="store.addFood(card.name)"
-          >
-            <v-icon>mdi-plus-circle</v-icon>
-          </v-btn>
+          <v-icon v-if="card.selected" color="error">mdi-minus-circle</v-icon>
+          <v-icon v-else color="success">mdi-plus-circle</v-icon>
         </v-card-actions>
       </v-card>
     </v-col>

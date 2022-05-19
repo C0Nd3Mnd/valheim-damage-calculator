@@ -4,5 +4,5 @@ const vuetify = require('@vuetify/vite-plugin');
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vuetify({ autoImport: true })],
+  plugins: [vue({ reactivityTransform: true }), vuetify({ autoImport: true })],
 });
