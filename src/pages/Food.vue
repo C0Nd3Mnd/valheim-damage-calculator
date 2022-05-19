@@ -14,12 +14,6 @@ function getFoodOptions() {
   return foodOptions();
 }
 
-const activeFoods = computed(() => store.activeFoods);
-
-const foodHealth = computed(() => store.foodHealth);
-
-const foodStamina = computed(() => store.foodStamina);
-
 const foodDecay = computed(() => {
   const foods = store.foodItems as Food[];
 
@@ -88,13 +82,13 @@ const chartOptions = computed<ChartOptions>(() => ({
         <template #title>Food</template>
         <template #append>
           <v-icon style="color: red">mdi-heart</v-icon>
-          25 + {{ foodHealth }}
+          25 + {{ store.foodHealth }}
           <v-icon style="color: goldenrod">mdi-run</v-icon>
-          50 + {{ foodStamina }}
+          50 + {{ store.foodStamina }}
         </template>
         <template #text>
           <v-select
-            :model-value="activeFoods"
+            v-model="store.activeFoods"
             :items="getFoodOptions()"
             label="Food"
             hide-details
