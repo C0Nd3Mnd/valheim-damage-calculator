@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { version } from '../../package.json';
 import { VALHEIM_VERSION } from '../data/version';
+import { mdiHeart } from '@mdi/js';
 </script>
 
 <template>
@@ -14,7 +15,7 @@ import { VALHEIM_VERSION } from '../data/version';
     a lot of the data is sourced from.
   </p>
   <p>
-    Made with <v-icon color="red">mdi-heart</v-icon> by
+    Made with <v-icon color="red">{{ mdiHeart }}</v-icon> by
     <a href="https://github.com/C0Nd3Mnd" target="_blank">C0Nd3Mnd</a>, see
     <a
       href="https://github.com/C0Nd3Mnd/valheim-damage-calculator"

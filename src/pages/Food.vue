@@ -5,7 +5,13 @@ import { Food, FoodDecay } from '../types';
 import { LineChart } from 'vue-chart-3';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 import { useCharacterStore } from '../store/character';
-import { $computed } from 'vue/macros';
+import {
+  mdiHeart,
+  mdiRun,
+  mdiTimer,
+  mdiPlusCircle,
+  mdiMinusCircle,
+} from '@mdi/js';
 
 Chart.register(...registerables);
 
@@ -105,9 +111,9 @@ const chartOptions = computed<ChartOptions>(() => ({
     <v-col cols="12">
       <v-card>
         <template #append>
-          <v-icon style="color: red">mdi-heart</v-icon>
+          <v-icon style="color: red">{{ mdiHeart }}</v-icon>
           25 + {{ store.foodHealth }}
-          <v-icon style="color: goldenrod">mdi-run</v-icon>
+          <v-icon style="color: goldenrod">{{ mdiRun }}</v-icon>
           50 + {{ store.foodStamina }}
         </template>
         <v-card-text>
@@ -127,8 +133,10 @@ const chartOptions = computed<ChartOptions>(() => ({
           @click="toggleFood(card)"
         >
           <template #prepend>
-            <v-icon v-if="card.selected" color="error">mdi-minus-circle</v-icon>
-            <v-icon v-else color="success">mdi-plus-circle</v-icon>
+            <v-icon v-if="card.selected" color="error">
+              {{ mdiMinusCircle }}
+            </v-icon>
+            <v-icon v-else color="success">{{ mdiPlusCircle }}</v-icon>
             <v-list-item-avatar class="mx-2">
               <v-img :src="card.image" />
             </v-list-item-avatar>
@@ -136,11 +144,11 @@ const chartOptions = computed<ChartOptions>(() => ({
           <v-list-item-header>
             <v-list-item-title>{{ card.name }}</v-list-item-title>
             <v-list-item-subtitle>
-              <v-icon style="color: red">mdi-heart</v-icon>
+              <v-icon style="color: red">{{ mdiHeart }}</v-icon>
               {{ card.health }}
-              <v-icon style="color: goldenrod">mdi-run</v-icon>
+              <v-icon style="color: goldenrod">{{ mdiRun }}</v-icon>
               {{ card.stamina }}
-              <v-icon style="color: grey">mdi-timer</v-icon>
+              <v-icon style="color: grey">{{ mdiTimer }}</v-icon>
               {{ card.duration }}s
             </v-list-item-subtitle>
           </v-list-item-header>
@@ -176,16 +184,18 @@ const chartOptions = computed<ChartOptions>(() => ({
         </v-card-title>
         <v-card-actions class="px-4">
           <span class="text-body-2">
-            <v-icon style="color: red">mdi-heart</v-icon>
+            <v-icon style="color: red">{{ mdiHeart }}</v-icon>
             {{ card.health }}
-            <v-icon style="color: goldenrod">mdi-run</v-icon>
+            <v-icon style="color: goldenrod">{{ mdiRun }}</v-icon>
             {{ card.stamina }}
-            <v-icon style="color: grey">mdi-timer</v-icon>
+            <v-icon style="color: grey">{{ mdiTimer }}</v-icon>
             {{ card.duration }}s
           </span>
           <v-spacer />
-          <v-icon v-if="card.selected" color="error">mdi-minus-circle</v-icon>
-          <v-icon v-else color="success">mdi-plus-circle</v-icon>
+          <v-icon v-if="card.selected" color="error">
+            {{ mdiMinusCircle }}
+          </v-icon>
+          <v-icon v-else color="success">{{ mdiPlusCircle }}</v-icon>
         </v-card-actions>
       </v-card>
     </v-col>

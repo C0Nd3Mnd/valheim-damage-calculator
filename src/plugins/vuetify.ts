@@ -1,5 +1,6 @@
 import 'vuetify/styles';
 import { createVuetify, ThemeDefinition } from 'vuetify';
+import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
 import { App } from 'vue';
 
 const lightTheme: ThemeDefinition = {
@@ -24,6 +25,13 @@ export function setupVuetify(app: App) {
         darkTheme,
       },
       defaultTheme: 'lightTheme',
+    },
+    icons: {
+      defaultSet: 'mdi',
+      aliases,
+      sets: {
+        mdi,
+      },
     },
   });
 

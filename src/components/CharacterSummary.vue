@@ -2,6 +2,18 @@
 import { DamageType, Tenacity } from '../types';
 import { computed } from 'vue';
 import { useCharacterStore } from '../store/character';
+import {
+  mdiShieldSwordOutline,
+  mdiHeart,
+  mdiBaseballBat,
+  mdiBowArrow,
+  mdiSword,
+  mdiFire,
+  mdiSkullCrossbones,
+  mdiGhost,
+  mdiSnowflake,
+  mdiFlash,
+} from '@mdi/js';
 
 const store = useCharacterStore();
 
@@ -15,65 +27,65 @@ function getDamageTypeTenacity(type: DamageType): string {
   return modifier.tenacity * 100 + '%';
 }
 
-const summaryElements = computed(() => {
+const summaryElements = $computed(() => {
   return [
     {
       label: 'Total armor',
-      icon: 'shield-sword-outline',
+      icon: mdiShieldSwordOutline,
       color: 'dimgrey',
       value: store.totalArmor,
     },
     {
       label: 'Health',
-      icon: 'heart',
+      icon: mdiHeart,
       color: 'red',
       value: store.health,
     },
     {
       label: 'Blunt modifier',
-      icon: 'baseball-bat',
+      icon: mdiBaseballBat,
       color: 'burlywood',
       value: getDamageTypeTenacity(DamageType.Blunt),
     },
     {
       label: 'Pierce modifier',
-      icon: 'bow-arrow',
+      icon: mdiBowArrow,
       color: 'brown',
       value: getDamageTypeTenacity(DamageType.Pierce),
     },
     {
       label: 'Slash modifier',
-      icon: 'sword',
+      icon: mdiSword,
       color: 'silver',
       value: getDamageTypeTenacity(DamageType.Slash),
     },
     {
       label: 'Fire modifier',
-      icon: 'fire',
+      icon: mdiFire,
       color: 'orange',
       value: getDamageTypeTenacity(DamageType.Fire),
     },
     {
       label: 'Poison modifier',
-      icon: 'skull-crossbones',
+      icon: mdiSkullCrossbones,
       color: 'green',
       value: getDamageTypeTenacity(DamageType.Poison),
     },
     {
       label: 'Spirit modifier',
-      icon: 'ghost',
+      icon: mdiGhost,
       color: 'cadetblue',
       value: getDamageTypeTenacity(DamageType.Spirit),
     },
     {
       label: 'Frost modifier',
-      icon: 'snowflake',
+      icon: mdiSnowflake,
       color: 'lightskyblue',
       value: getDamageTypeTenacity(DamageType.Frost),
     },
     {
       label: 'Lightning modifier',
-      icon: 'flash',
+      icon: mdiFlash,
       color: 'gold',
       value: getDamageTypeTenacity(DamageType.Lightning),
     },
@@ -87,7 +99,7 @@ const summaryElements = computed(() => {
     <v-list-item v-for="element in summaryElements" :key="element.label">
       <v-list-item-avatar>
         <v-icon :style="{ color: element.color }">
-          {{ 'mdi-' + element.icon }}
+          {{ element.icon }}
         </v-icon>
       </v-list-item-avatar>
       <v-list-item-header>

@@ -4,6 +4,7 @@ import { armorOptions } from '../data/armor';
 import { ArmorPiece } from '../types';
 import { potionOptions } from '../data/potions';
 import { useCharacterStore } from '../store/character';
+import { mdiShieldSwordOutline, mdiBottleTonic, mdiHeart } from '@mdi/js';
 
 const store = useCharacterStore();
 
@@ -82,7 +83,7 @@ const armorLabels = ref({
           />
         </template>
         <template #append>
-          <v-icon style="color: dimgrey">mdi-shield-sword-outline</v-icon>
+          <v-icon style="color: dimgrey">{{ mdiShieldSwordOutline }}</v-icon>
           {{ store.armorByPiece[piece] }} Armor
         </template>
       </v-card>
@@ -100,7 +101,7 @@ const armorLabels = ref({
           />
         </template>
         <template #append>
-          <v-icon style="color: deeppink">mdi-bottle-tonic</v-icon>
+          <v-icon style="color: deeppink">{{ mdiBottleTonic }}</v-icon>
           {{ store.activePotions.length }}
           active
         </template>
@@ -119,7 +120,7 @@ const armorLabels = ref({
           />
         </template>
         <template #append>
-          <v-icon style="color: red">mdi-heart</v-icon>
+          <v-icon style="color: red">{{ mdiHeart }}</v-icon>
           {{ health }} Health
         </template>
         <v-card-actions>

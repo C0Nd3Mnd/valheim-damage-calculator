@@ -1,41 +1,47 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import CharacterSummary from './components/CharacterSummary.vue';
-import { useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { version } from '../package.json';
 import { VALHEIM_VERSION } from './data/version';
 import { useDark } from '@vueuse/core';
+import {
+  mdiPigVariant,
+  mdiHammerWrench,
+  mdiFood,
+  mdiInformation,
+} from '@mdi/js';
 
-const router = useRouter();
+const route = useRoute();
 
 const isDark = useDark();
 
-const title = computed(() => router.currentRoute.value.meta.title);
+const title = $computed(() => route.meta.title);
 
-const drawer = ref<boolean | null>(null);
+const drawer = $ref<boolean | null>(null);
 
-const navigation = computed(() => [
+const navigation = [
   {
     to: '/creatures',
-    icon: 'mdi-pig-variant',
+    icon: mdiPigVariant,
     title: 'Creatures',
   },
   {
     to: '/equipment',
-    icon: 'mdi-hammer-wrench',
+    icon: mdiHammerWrench,
     title: 'Equipment',
   },
   {
     to: '/food',
-    icon: 'mdi-food',
+    icon: mdiFood,
     title: 'Food',
   },
   {
     to: '/about',
-    icon: 'mdi-information',
+    icon: mdiInformation,
     title: 'About',
   },
-]);
+];
 </script>
 
 <template>
