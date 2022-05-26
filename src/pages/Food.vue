@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { foodOptions, foods } from '../data/foods';
-import { computed, ref, watch } from 'vue';
+import { computed } from 'vue';
 import { Food, FoodDecay } from '../types';
 import { LineChart } from 'vue-chart-3';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
@@ -44,7 +44,7 @@ function toggleFood(card: SelectableFood) {
   return card.selected ? store.removeFood(card.name) : store.addFood(card.name);
 }
 
-const foodDecay = computed(() => {
+const foodDecay = $computed(() => {
   const foods = store.foodItems as Food[];
 
   const points: FoodDecay[] = [];
@@ -70,25 +70,25 @@ const foodDecay = computed(() => {
   return points;
 });
 
-const foodChart = computed<ChartData>(() => {
+const foodChart = $computed<ChartData>(() => {
   return {
-    labels: foodDecay.value.map(({ time }) => time / 60),
+    labels: foodDecay.map(({ time }) => time / 60),
     datasets: [
       {
         label: 'Health',
         borderColor: 'red',
-        data: foodDecay.value.map(({ health }) => health + 25),
+        data: foodDecay.map(({ health }) => health + 25),
       },
       {
         label: 'Stamina',
         borderColor: 'goldenrod',
-        data: foodDecay.value.map(({ stamina }) => stamina + 50),
+        data: foodDecay.map(({ stamina }) => stamina + 50),
       },
     ],
   };
 });
 
-const chartOptions = computed<ChartOptions>(() => ({
+const chartOptions = $computed<ChartOptions>(() => ({
   scales: {
     x: {
       display: true,

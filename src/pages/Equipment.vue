@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
 import { armorOptions } from '../data/armor';
 import { ArmorPiece } from '../types';
 import { potionOptions } from '../data/potions';
@@ -12,40 +11,17 @@ function getName(piece: ArmorPiece) {
   return store[piece].name;
 }
 
-function setArmor(piece: ArmorPiece, name: string) {
-  store.setArmor(piece, name);
-}
-
 function getLevel(piece: ArmorPiece) {
   return store[piece].level + 1;
 }
 
-function setLevel(piece: ArmorPiece, level: number) {
-  store.setLevel(piece, level - 1);
-}
-
-function getPotionOptions() {
-  return potionOptions();
-}
-
-const health = computed({
-  get() {
-    return store.health;
-  },
-  set(val: number) {
-    store.health = val;
-  },
-});
-
-const foodHealth = computed(() => store.foodHealth);
-
 // TODO Move to separate file.
-const armorLabels = ref({
+const armorLabels = {
   [ArmorPiece.Helmet]: 'Helmet',
   [ArmorPiece.Chest]: 'Chest',
   [ArmorPiece.Leg]: 'Leg',
   [ArmorPiece.Cape]: 'Cape',
-});
+};
 </script>
 
 <template>
@@ -72,14 +48,14 @@ const armorLabels = ref({
             :model-value="getName(piece)"
             :label="armorLabels[piece]"
             :items="armorOptions(piece)"
-            @update:modelValue="setArmor(piece, $event)"
+            @update:modelValue="store.setArmor(piece, $event)"
           />
           <v-rating
             :model-value="getLevel(piece)"
             :length="store.maxLevels[piece]"
             color="#ffd700"
             hover
-            @update:modelValue="setLevel(piece, $event)"
+            @update:modelValue="store.setLevel(piece, $event)"
           />
         </template>
         <template #append>
@@ -94,7 +70,7 @@ const armorLabels = ref({
         <template #text>
           <v-select
             v-model="store.activePotions"
-            :items="getPotionOptions()"
+            :items="potionOptions()"
             label="Potions"
             hide-details
             multiple
@@ -112,7 +88,7 @@ const armorLabels = ref({
         <template #title>Health</template>
         <template #text>
           <v-slider
-            v-model="health"
+            v-model="store.health"
             :min="1"
             :max="250"
             :step="1"
@@ -121,11 +97,13 @@ const armorLabels = ref({
         </template>
         <template #append>
           <v-icon style="color: red">{{ mdiHeart }}</v-icon>
-          {{ health }} Health
+          {{ store.health }} Health
         </template>
         <v-card-actions>
           <v-spacer />
-          <v-btn @click="health = foodHealth + 25">Apply from food</v-btn>
+          <v-btn @click="store.health = store.foodHealth + 25">
+            Apply from food
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>

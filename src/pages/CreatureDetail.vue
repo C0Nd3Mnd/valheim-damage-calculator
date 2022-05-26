@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { creatures } from '../data/creatures';
-import { computed, ref } from 'vue';
-import { Ability, DamageType } from '../types';
+import { Ability, DamageType, TenacityModifier } from '../types';
 import { useCharacterStore } from '../store/character';
 
 const characterStore = useCharacterStore();
@@ -11,7 +10,7 @@ const route = useRoute();
 
 const { name } = route.params;
 
-const creature = computed(() => creatures.find((c) => c.name === name));
+const creature = $computed(() => creatures.find((c) => c.name === name));
 
 function multiplier(level: number) {
   return 1 + level * 0.5;
@@ -59,7 +58,7 @@ function damageAfterMitigations(ability: Ability, level: number) {
   return calculateDamage(total);
 }
 
-const damageTypeLabels = ref({
+const damageTypeLabels = {
   [DamageType.Blunt]: 'Blunt',
   [DamageType.Pierce]: 'Pierce',
   [DamageType.Slash]: 'Slash',
@@ -68,7 +67,7 @@ const damageTypeLabels = ref({
   [DamageType.Spirit]: 'Spirit',
   [DamageType.Frost]: 'Frost',
   [DamageType.Lightning]: 'Lightning',
-});
+};
 </script>
 
 <template>

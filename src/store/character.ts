@@ -3,9 +3,7 @@ import { ArmorPiece, Food, Tenacity, TenacityModifier } from '../types';
 import { armorSets, pieceByName } from '../data/armor';
 import { potions } from '../data/potions';
 import { foods } from '../data/foods';
-import { computed, reactive, ref } from 'vue';
 import { useLocalStorage } from '@vueuse/core';
-import { $computed } from 'vue/macros';
 
 // export const newChStoreTmp = defineStore('tmpch', () => {
 //   const pieces = $ref(

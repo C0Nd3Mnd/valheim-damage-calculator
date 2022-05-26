@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
 import CharacterSummary from './components/CharacterSummary.vue';
 import { useRoute } from 'vue-router';
 import { version } from '../package.json';

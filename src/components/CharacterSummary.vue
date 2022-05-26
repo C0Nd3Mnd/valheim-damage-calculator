@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { DamageType, Tenacity } from '../types';
-import { computed } from 'vue';
 import { useCharacterStore } from '../store/character';
 import {
   mdiShieldSwordOutline,
