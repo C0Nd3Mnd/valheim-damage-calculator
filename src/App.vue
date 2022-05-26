@@ -64,6 +64,7 @@ const navigation = [
           :to="item.to"
           :prepend-icon="item.icon"
           :title="item.title"
+          color="secondary"
         />
       </v-list>
       <character-summary />

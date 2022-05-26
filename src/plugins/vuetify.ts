@@ -3,17 +3,30 @@ import { createVuetify, ThemeDefinition } from 'vuetify';
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
 import { App } from 'vue';
 
+enum PlainsColors {
+  DarkGreen = '#023430',
+  DarkBlue = '#2C3D4C',
+  Blue = '#1773A9',
+  LightBlue = '#709DB5',
+  Brown = '#B78852',
+  Pink = '#CA6D61',
+  Red = '#AD3131',
+  DarkRed = '#431815',
+}
+
 const lightTheme: ThemeDefinition = {
   dark: false,
   colors: {
-    primary: '#b48e74',
+    primary: PlainsColors.Brown,
+    secondary: PlainsColors.Pink,
   },
 };
 
 const darkTheme: ThemeDefinition = {
   dark: true,
   colors: {
-    primary: '#b48e74',
+    primary: PlainsColors.DarkRed,
+    secondary: PlainsColors.Blue,
   },
 };
 
