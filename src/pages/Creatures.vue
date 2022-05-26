@@ -17,7 +17,6 @@ const categorizedCreatures = $computed<CategorizedCreatures>(
 
 <template>
   <h5 class="text-h5">Select Creature</h5>
-  {{ categorizedCreatures }}
   <v-list>
     <template v-for="(category, i) in categorizedCreatures" :key="i">
       <v-list-subheader>{{ i }}</v-list-subheader>
