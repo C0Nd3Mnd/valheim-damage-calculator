@@ -1,38 +1,38 @@
-import { Food } from '../types';
+import { Food } from '@/types';
 
-import blacksoup from '../assets/food/blacksoup.png';
-import bloodpudding from '../assets/food/bloodpudding.png';
-import blueberries from '../assets/food/blueberries.png';
-import boarjerky from '../assets/food/boarjerky.png';
-import bread from '../assets/food/bread.png';
-import carrot from '../assets/food/carrot.png';
-import carrotsoup from '../assets/food/carrotsoup.png';
-import cloudberries from '../assets/food/cloudberries.png';
-import cookedboarmeat from '../assets/food/cookedboarmeat.png';
-import cookeddeermeat from '../assets/food/cookeddeermeat.png';
-import cookedfish from '../assets/food/cookedfish.png';
-import cookedloxmeat from '../assets/food/cookedloxmeat.png';
-import cookedserpentmeat from '../assets/food/cookedserpentmeat.png';
-import cookedwolfmeat from '../assets/food/cookedwolfmeat.png';
-import deerstew from '../assets/food/deerstew.png';
-import eyescream from '../assets/food/eyescream.png';
-import fishwraps from '../assets/food/fishwraps.png';
-import grillednecktail from '../assets/food/grillednecktail.png';
-import honey from '../assets/food/honey.png';
-import loxmeatpie from '../assets/food/loxmeatpie.png';
-import mincedmeatsauce from '../assets/food/mincedmeatsauce.png';
-import muckshake from '../assets/food/muckshake.png';
-import mushroom from '../assets/food/mushroom.png';
-import onion from '../assets/food/onion.png';
-import onionsoup from '../assets/food/onionsoup.png';
-import queensjam from '../assets/food/queensjam.png';
-import raspberries from '../assets/food/raspberries.png';
-import sausages from '../assets/food/sausages.png';
-import serpentstew from '../assets/food/serpentstew.png';
-import turnipstew from '../assets/food/turnipstew.png';
-import wolfjerky from '../assets/food/wolfjerky.png';
-import wolfskewer from '../assets/food/wolfskewer.png';
-import yellowmushroom from '../assets/food/yellowmushroom.png';
+import blacksoup from '@/assets/food/blacksoup.png';
+import bloodpudding from '@/assets/food/bloodpudding.png';
+import blueberries from '@/assets/food/blueberries.png';
+import boarjerky from '@/assets/food/boarjerky.png';
+import bread from '@/assets/food/bread.png';
+import carrot from '@/assets/food/carrot.png';
+import carrotsoup from '@/assets/food/carrotsoup.png';
+import cloudberries from '@/assets/food/cloudberries.png';
+import cookedboarmeat from '@/assets/food/cookedboarmeat.png';
+import cookeddeermeat from '@/assets/food/cookeddeermeat.png';
+import cookedfish from '@/assets/food/cookedfish.png';
+import cookedloxmeat from '@/assets/food/cookedloxmeat.png';
+import cookedserpentmeat from '@/assets/food/cookedserpentmeat.png';
+import cookedwolfmeat from '@/assets/food/cookedwolfmeat.png';
+import deerstew from '@/assets/food/deerstew.png';
+import eyescream from '@/assets/food/eyescream.png';
+import fishwraps from '@/assets/food/fishwraps.png';
+import grillednecktail from '@/assets/food/grillednecktail.png';
+import honey from '@/assets/food/honey.png';
+import loxmeatpie from '@/assets/food/loxmeatpie.png';
+import mincedmeatsauce from '@/assets/food/mincedmeatsauce.png';
+import muckshake from '@/assets/food/muckshake.png';
+import mushroom from '@/assets/food/mushroom.png';
+import onion from '@/assets/food/onion.png';
+import onionsoup from '@/assets/food/onionsoup.png';
+import queensjam from '@/assets/food/queensjam.png';
+import raspberries from '@/assets/food/raspberries.png';
+import sausages from '@/assets/food/sausages.png';
+import serpentstew from '@/assets/food/serpentstew.png';
+import turnipstew from '@/assets/food/turnipstew.png';
+import wolfjerky from '@/assets/food/wolfjerky.png';
+import wolfskewer from '@/assets/food/wolfskewer.png';
+import yellowmushroom from '@/assets/food/yellowmushroom.png';
 
 export const foods: Food[] = [
   {
@@ -54,7 +54,7 @@ export const foods: Food[] = [
     health: 8,
     stamina: 35,
     duration: 900,
-    image: blacksoup,
+    image: honey,
   },
   {
     name: 'Grilled neck tail',

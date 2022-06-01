@@ -1,4 +1,4 @@
-import { Armor, ArmorPiece, ArmorSet, DamageType, Tenacity } from '../types';
+import { Armor, ArmorPiece, ArmorSet, DamageType, Tenacity } from '@/types';
 
 export const armor: Armor[] = [
   {

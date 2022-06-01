@@ -1,4 +1,4 @@
-import { DamageType, Potion, Tenacity } from '../types';
+import { DamageType, Potion, Tenacity } from '@/types';
 
 export const potions: Potion[] = [
   {

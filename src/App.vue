@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import CharacterSummary from './components/CharacterSummary.vue';
+import CharacterSummary from '@/components/CharacterSummary.vue';
 import { useRoute } from 'vue-router';
 import { version } from '../package.json';
-import { VALHEIM_VERSION } from './data/version';
+import { VALHEIM_VERSION } from '@/data/version';
 import { useDark } from '@vueuse/core';
 import {
   mdiPigVariant,

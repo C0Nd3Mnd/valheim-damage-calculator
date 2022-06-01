@@ -1,11 +1,11 @@
 import { RouteRecordRaw } from 'vue-router';
 
 // Page imports
-import Creatures from '../pages/Creatures.vue';
-import CreatureDetail from '../pages/CreatureDetail.vue';
-import Equipment from '../pages/Equipment.vue';
-import About from '../pages/About.vue';
-import Food from '../pages/Food.vue';
+import Creatures from '@/pages/Creatures.vue';
+import CreatureDetail from '@/pages/CreatureDetail.vue';
+import Equipment from '@/pages/Equipment.vue';
+import About from '@/pages/About.vue';
+import Food from '@/pages/Food.vue';
 
 export const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/creatures' },

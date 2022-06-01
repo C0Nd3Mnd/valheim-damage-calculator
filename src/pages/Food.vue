@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { foodOptions, foods } from '../data/foods';
-import { computed } from 'vue';
-import { Food, FoodDecay } from '../types';
+import { foods } from '@/data/foods';
+import { Food, FoodDecay } from '@/types';
 import { LineChart } from 'vue-chart-3';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
-import { useCharacterStore } from '../store/character';
+import { useCharacterStore } from '@/store/character';
 import {
   mdiHeart,
   mdiRun,
@@ -12,7 +11,7 @@ import {
   mdiPlusCircle,
   mdiMinusCircle,
 } from '@mdi/js';
-import { useFoodStore } from '../store/food';
+import { useFoodStore } from '@/store/food';
 
 Chart.register(...registerables);
 

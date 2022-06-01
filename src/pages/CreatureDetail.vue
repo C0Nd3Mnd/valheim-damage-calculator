@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import { creatures } from '../data/creatures';
-import { Ability, DamageType, TenacityModifier } from '../types';
-import { useCharacterStore } from '../store/character';
+import { creatures } from '@/data/creatures';
+import { Ability, DamageType, TenacityModifier } from '@/types';
+import { useCharacterStore } from '@/store/character';
 
 const characterStore = useCharacterStore();
 

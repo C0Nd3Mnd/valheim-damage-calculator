@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { creatures } from '../data/creatures';
-import { Creature } from '../types';
+import { creatures } from '@/data/creatures';
+import { Creature } from '@/types';
 
 interface CategorizedCreatures {
   [key: string]: Creature[];

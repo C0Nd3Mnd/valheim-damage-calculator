@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { mdiShieldSwordOutline, mdiBottleTonic, mdiHeart } from '@mdi/js';
-import { armorOptions } from '../data/armor';
-import { ArmorPiece } from '../types';
-import { potionOptions } from '../data/potions';
-import { useCharacterStore } from '../store/character';
-import { useFoodStore } from '../store/food';
+import { armorOptions } from '@/data/armor';
+import { ArmorPiece } from '@/types';
+import { potionOptions } from '@/data/potions';
+import { useCharacterStore } from '@/store/character';
+import { useFoodStore } from '@/store/food';
 
 const characterStore = useCharacterStore();
 const foodStore = useFoodStore();

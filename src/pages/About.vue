@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { version } from '../../package.json';
-import { VALHEIM_VERSION } from '../data/version';
+import { VALHEIM_VERSION } from '@/data/version';
 import { mdiHeart } from '@mdi/js';
 </script>
 

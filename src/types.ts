@@ -122,7 +122,6 @@ export interface Ability {
     damage: number;
   }[];
 }
-[];
 
 /**
  * `Creature` describes a specific creature.

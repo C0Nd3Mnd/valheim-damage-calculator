@@ -1,4 +1,4 @@
-import { Biome, Creature, DamageType } from '../types';
+import { Biome, Creature, DamageType } from '@/types';
 
 export const creatures: Creature[] = [
   {

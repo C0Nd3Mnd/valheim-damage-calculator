@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { foods } from '../data/foods';
+import { foods } from '@/data/foods';
 import { useLocalStorage } from '@vueuse/core';
 import { computed } from 'vue';
 

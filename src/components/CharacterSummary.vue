@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { DamageType, Tenacity } from '../types';
-import { useCharacterStore } from '../store/character';
+import { DamageType, Tenacity } from '@/types';
+import { useCharacterStore } from '@/store/character';
 import {
   mdiShieldSwordOutline,
   mdiHeart,
