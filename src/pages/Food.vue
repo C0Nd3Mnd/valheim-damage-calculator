@@ -12,10 +12,12 @@ import {
   mdiPlusCircle,
   mdiMinusCircle,
 } from '@mdi/js';
+import { useFoodStore } from '../store/food';
 
 Chart.register(...registerables);
 
-const store = useCharacterStore();
+const characterStore = useCharacterStore();
+const foodStore = useFoodStore();
 
 interface SelectableFood extends Food {
   selected: boolean;
@@ -25,7 +27,7 @@ const foodCards = $computed<SelectableFood[]>(() => {
   return foods
     .map((food) => ({
       ...food,
-      selected: store.activeFoods.includes(food.name),
+      selected: foodStore.active.includes(food.name),
     }))
     .sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1))
     .sort((a, b) => (a.selected > b.selected ? -1 : 1))
@@ -41,11 +43,11 @@ const foodCardsFilter = $computed(() =>
 );
 
 function toggleFood(card: SelectableFood) {
-  return card.selected ? store.removeFood(card.name) : store.addFood(card.name);
+  return card.selected ? foodStore.remove(card.name) : foodStore.add(card.name);
 }
 
 const foodDecay = $computed(() => {
-  const foods = store.foodItems as Food[];
+  const foods = foodStore.items as Food[];
 
   const points: FoodDecay[] = [];
 
@@ -112,9 +114,9 @@ const chartOptions = $computed<ChartOptions>(() => ({
       <v-card>
         <template #append>
           <v-icon style="color: red">{{ mdiHeart }}</v-icon>
-          25 + {{ store.foodHealth }}
+          25 + {{ foodStore.health }}
           <v-icon style="color: goldenrod">{{ mdiRun }}</v-icon>
-          50 + {{ store.foodStamina }}
+          50 + {{ foodStore.stamina }}
         </template>
         <v-card-text>
           <LineChart :chart-data="foodChart" :options="chartOptions"
@@ -129,7 +131,7 @@ const chartOptions = $computed<ChartOptions>(() => ({
         <v-list-item
           v-for="card in foodCards"
           :key="card.name"
-          :disabled="store.foodMax && !card.selected"
+          :disabled="foodStore.full && !card.selected"
           @click="toggleFood(card)"
         >
           <template #prepend>
@@ -165,7 +167,7 @@ const chartOptions = $computed<ChartOptions>(() => ({
       lg="2"
     >
       <v-card
-        :disabled="store.foodMax && !card.selected"
+        :disabled="foodStore.full && !card.selected"
         @click="toggleFood(card)"
       >
         <v-card-title class="justify-center">

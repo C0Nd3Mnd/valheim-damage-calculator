@@ -55,7 +55,6 @@ export const useCharacterStore = defineStore({
     }),
     activePotions: useLocalStorage('character.activePotions', [] as string[]),
     health: useLocalStorage('character.health', 25),
-    activeFoods: useLocalStorage('character.activeFoods', [] as string[]),
   }),
   getters: {
     armorByPiece(state) {
@@ -205,38 +204,6 @@ export const useCharacterStore = defineStore({
 
       return reducedModifiers;
     },
-    foodItems(state): Food[] {
-      const items = [];
-
-      for (const name of state.activeFoods) {
-        const food = foods.find((x) => x.name === name);
-
-        if (!food) {
-          continue;
-        }
-
-        items.push(food);
-      }
-
-      return items;
-    },
-    foodHealth(state): number {
-      return this.foodItems
-        .map(({ health }) => health)
-        .reduce((sum, a) => sum + a, 0);
-    },
-    foodStamina(state): number {
-      return this.foodItems
-        .map(({ stamina }) => stamina)
-        .reduce((sum, a) => sum + a, 0);
-    },
-    /**
-     * `foodMax` determines whether the food list ("stomach") is full.
-     * @param state
-     */
-    foodMax(state): boolean {
-      return this.activeFoods.length >= 3;
-    },
   },
   actions: {
     setArmor(piece: ArmorPiece, name: string) {
@@ -263,28 +230,6 @@ export const useCharacterStore = defineStore({
     },
     setPotions(potions: string[]) {
       this.activePotions = potions;
-    },
-    addFood(name: string) {
-      if (this.activeFoods.length >= 3) {
-        return;
-      }
-
-      const index = this.activeFoods.indexOf(name);
-
-      if (index > -1) {
-        return;
-      }
-
-      this.activeFoods.push(name);
-    },
-    removeFood(name: string) {
-      const index = this.activeFoods.indexOf(name);
-
-      if (index === -1) {
-        return;
-      }
-
-      this.activeFoods.splice(index, 1);
     },
   },
 });

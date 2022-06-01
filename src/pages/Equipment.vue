@@ -1,18 +1,20 @@
 <script setup lang="ts">
+import { mdiShieldSwordOutline, mdiBottleTonic, mdiHeart } from '@mdi/js';
 import { armorOptions } from '../data/armor';
 import { ArmorPiece } from '../types';
 import { potionOptions } from '../data/potions';
 import { useCharacterStore } from '../store/character';
-import { mdiShieldSwordOutline, mdiBottleTonic, mdiHeart } from '@mdi/js';
+import { useFoodStore } from '../store/food';
 
-const store = useCharacterStore();
+const characterStore = useCharacterStore();
+const foodStore = useFoodStore();
 
 function getName(piece: ArmorPiece) {
-  return store[piece].name;
+  return characterStore[piece].name;
 }
 
 function getLevel(piece: ArmorPiece) {
-  return store[piece].level + 1;
+  return characterStore[piece].level + 1;
 }
 
 // TODO Move to separate file.
@@ -48,19 +50,19 @@ const armorLabels = {
             :model-value="getName(piece)"
             :label="armorLabels[piece]"
             :items="armorOptions(piece)"
-            @update:modelValue="store.setArmor(piece, $event)"
+            @update:modelValue="characterStore.setArmor(piece, $event)"
           />
           <v-rating
             :model-value="getLevel(piece)"
-            :length="store.maxLevels[piece]"
+            :length="characterStore.maxLevels[piece]"
             color="#ffd700"
             hover
-            @update:modelValue="store.setLevel(piece, $event)"
+            @update:modelValue="characterStore.setLevel(piece, $event)"
           />
         </template>
         <template #append>
           <v-icon style="color: dimgrey">{{ mdiShieldSwordOutline }}</v-icon>
-          {{ store.armorByPiece[piece] }} Armor
+          {{ characterStore.armorByPiece[piece] }} Armor
         </template>
       </v-card>
     </v-col>
@@ -69,7 +71,7 @@ const armorLabels = {
         <template #title>Potions and Powers</template>
         <template #text>
           <v-select
-            v-model="store.activePotions"
+            v-model="characterStore.activePotions"
             :items="potionOptions()"
             label="Potions"
             hide-details
@@ -78,7 +80,7 @@ const armorLabels = {
         </template>
         <template #append>
           <v-icon style="color: deeppink">{{ mdiBottleTonic }}</v-icon>
-          {{ store.activePotions.length }}
+          {{ characterStore.activePotions.length }}
           active
         </template>
       </v-card>
@@ -88,7 +90,7 @@ const armorLabels = {
         <template #title>Health</template>
         <template #text>
           <v-slider
-            v-model="store.health"
+            v-model="characterStore.health"
             :min="1"
             :max="250"
             :step="1"
@@ -97,11 +99,11 @@ const armorLabels = {
         </template>
         <template #append>
           <v-icon style="color: red">{{ mdiHeart }}</v-icon>
-          {{ store.health }} Health
+          {{ characterStore.health }} Health
         </template>
         <v-card-actions>
           <v-spacer />
-          <v-btn @click="store.health = store.foodHealth + 25">
+          <v-btn @click="characterStore.health = foodStore.health + 25">
             Apply from food
           </v-btn>
         </v-card-actions>
